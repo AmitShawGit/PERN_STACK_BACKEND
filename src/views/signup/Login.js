@@ -24,9 +24,15 @@ const Login = () => {
     }
     const checkUser = (e) => {
         e.preventDefault();
-        console.log(userEntry);
-        navigate("/dashboard")
-       localStorage.setItem("Authenticate", true)
+        if(userEntry.username === "mayank@1999"){
+            if(userEntry.password === "1234"){
+                navigate("/dashboard") 
+            }else{
+                alert("wrong password");
+            }
+        }else{
+            alert("wrong email");
+        }
     }
     return (
         <div className="bg-light min-vh-100 d-flex flex-row align-items-center loginBg">
