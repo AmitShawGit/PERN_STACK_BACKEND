@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import  { useNavigate } from 'react-router-dom';
 import {
     CButton,
     CCard,
@@ -18,12 +18,14 @@ import { cilLockLocked, cilUser } from '@coreui/icons'
 
 const Login = () => {
     let [userEntry, setUserEntry] = useState({ username: "", password: "" })
+    const navigate= useNavigate()
     const handleChange = (e) => {
         setUserEntry((dataEntry) => ({ ...dataEntry, [e.target.name]: e.target.value }))
     }
     const checkUser = (e) => {
         e.preventDefault();
         console.log(userEntry);
+        navigate("/dashboard")
        localStorage.setItem("Authenticate", true)
     }
     return (
