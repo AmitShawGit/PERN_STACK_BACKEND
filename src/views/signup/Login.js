@@ -16,7 +16,7 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 
-const Login = () => {
+const Login = ({onLogin}) => {
     let [userEntry, setUserEntry] = useState({ username: "", password: "" })
     const navigate= useNavigate()
     const handleChange = (e) => {
@@ -26,6 +26,7 @@ const Login = () => {
         e.preventDefault();
         if(userEntry.username === "mayank@1999"){
             if(userEntry.password === "1234"){
+                onLogin();
                 navigate("/dashboard") 
             }else{
                 alert("wrong password");
