@@ -9,6 +9,7 @@ const Input = (props) => {
                 label={props.label}
                 placeholder={props.placeholder}
                 text={props.validation}
+                name={props.name}
             />
         </div>
     )
