@@ -2,7 +2,7 @@ import React from 'react';
 // import Dashboard from './views/dashboard/Dashboard';
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
 const ViewUser = React.lazy(()=> import('./views/usermanagement/ViewUser'));
-
+const AddUser = React.lazy(()=> import('./views/usermanagement/AddUser'))
 const route2 = [
     {
         path:"/",
@@ -19,6 +19,11 @@ const route2 = [
         path:"/theme/view-user",
         name:"View Users",
         element: ViewUser
+    },
+    {
+        path:"/theme/add-user",
+        name:"Add Users",
+        element: AddUser
     },
 ]
 

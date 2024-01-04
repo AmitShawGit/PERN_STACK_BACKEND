@@ -30,6 +30,7 @@ const _nav = [
     component: CNavTitle,
     name: 'Theme',
   },
+ 
   {
     component: CNavItem,
     name: 'View User',
