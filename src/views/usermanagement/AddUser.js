@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Input from 'src/components/Input';
-import { CCard, CCardBody, CButton, CRow, CCol } from '@coreui/react'
+import { CCard, CCardBody, CButton, CRow, CCol, CFormSelect } from '@coreui/react'
 
 const AddUser = () => {
   let [userCreated, setUserCreated] = useState({ name: "", email: "", password: "", mobile: "", address: "", role: "" })
@@ -21,16 +21,7 @@ const AddUser = () => {
       placeholder: "Please Enter Mpbile Number",
       validation: "Please enter valid number",
       type: "number",
-      name: "mobile",   
-    },
-    {
-      key: 5,
-      label: "Role",
-      id: "role",
-      placeholder: "Please enter role",
-      validation: "Please enter role",
-      type: "text",
-      name: "role",
+      name: "mobile",
     },
     {
       key: 4,
@@ -62,7 +53,6 @@ const AddUser = () => {
   ];
   //user entry
   const handleChange = (e) => {
- 
     setUserCreated((prevData) => ({ ...prevData, [e.target.name]: e.target.value }))
   }
   //Save User
@@ -79,21 +69,40 @@ const AddUser = () => {
             <CRow>
               {
                 userRegistration.map((item, index) => {
-                  return <CCol key={index} sm={4}>
-                    <Input 
-                    name={item.name} 
-                    type={item.type} 
-                    label={item.label} 
-                    id={item.id} 
-                    placeholder={item.placeholder} 
-                    validation={item.validation} change={handleChange} value={userCreated[item.name]} />
+                  return (
+                    <>
+                      <CCol key={index} sm={4}>
+                        <Input
+                          name={item.name}
+                          type={item.type}
+                          label={item.label}
+                          id={item.id}
+                          placeholder={item.placeholder}
+                          validation={item.validation} change={handleChange} value={userCreated[item.name]} />
+                      </CCol>
 
-                    </CCol>
+
+                    </>
+                  )
 
                 })
               }
+              <CCol sm={4}>
+                <CFormSelect
+                  label="Role"
+                  name="role"
+                  onChange={handleChange}
+                  id="role"
+                  options={[
+                    'Select',
+                    { label: 'Admin', value: 'admin' },
+                    { label: 'User', value: 'user' },
+                    { label: 'Student', value: 'student' },
+                  ]}
+                />
+              </CCol>
             </CRow>
-            <CButton type='submit'>Go somewhere</CButton>
+            <CButton type='submit'>Save</CButton>
           </form>
         </CCardBody>
       </CCard>
