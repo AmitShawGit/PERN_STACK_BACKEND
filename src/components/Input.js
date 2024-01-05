@@ -10,6 +10,8 @@ const Input = (props) => {
                 placeholder={props.placeholder}
                 text={props.validation}
                 name={props.name}
+                onChange={props.change}
+                value={props.value}
             />
         </div>
     )

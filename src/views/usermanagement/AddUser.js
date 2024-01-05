@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Input from 'src/components/Input';
 import { CCard, CCardBody, CButton, CRow, CCol } from '@coreui/react'
 
 const AddUser = () => {
+  let [userCreated, setUserCreated] = useState({ name: "", email: "", password: "", mobile: "", address: "", role: "" })
   let userRegistration = [
     {
       key: 1,
@@ -11,7 +12,7 @@ const AddUser = () => {
       placeholder: "Please Enter Name",
       validation: "Please enter full name",
       type: "text",
-      name:"username"
+      name: "name",
     },
     {
       key: 2,
@@ -20,25 +21,7 @@ const AddUser = () => {
       placeholder: "Please Enter Mpbile Number",
       validation: "Please enter valid number",
       type: "number",
-      name:"mobile"
-    },
-    {
-      key: 3,
-      label: "Email",
-      id: "mail",
-      placeholder: "Please enter email",
-      validation: "Please enter valid email",
-      type: "email",
-      name:"email"
-    },
-    {
-      key: 4,
-      label: "Address",
-      id: "address",
-      placeholder: "Please enter address",
-      validation: "Please enter address",
-      type: "text",
-      name:"address"
+      name: "mobile",   
     },
     {
       key: 5,
@@ -47,7 +30,25 @@ const AddUser = () => {
       placeholder: "Please enter role",
       validation: "Please enter role",
       type: "text",
-      name:"role"
+      name: "role",
+    },
+    {
+      key: 4,
+      label: "Address",
+      id: "address",
+      placeholder: "Please enter address",
+      validation: "Please enter address",
+      type: "text",
+      name: "address",
+    },
+    {
+      key: 3,
+      label: "Email",
+      id: "mail",
+      placeholder: "Please enter email",
+      validation: "Please enter valid email",
+      type: "email",
+      name: "email",
     },
     {
       key: 6,
@@ -56,30 +57,43 @@ const AddUser = () => {
       placeholder: "Please enter password",
       validation: "Please enter password",
       type: "password",
-      name:"password"
+      name: "password",
     },
   ];
-
+  //user entry
+  const handleChange = (e) => {
+ 
+    setUserCreated((prevData) => ({ ...prevData, [e.target.name]: e.target.value }))
+  }
   //Save User
- const saveUser=(e)=>{
- e.preventDefault();
- console.log(e);
+  const saveUser = (e) => {
+    e.preventDefault();
+    console.log(userCreated);
   }
   return (
     <>
       <CCard>
 
         <CCardBody>
-          <form>
+          <form onSubmit={saveUser}>
             <CRow>
               {
                 userRegistration.map((item, index) => {
-                  return <CCol key={index} sm={4}><Input name={item.name} type={item.type} label={item.label} id={item.id} placeholder={item.placeholder} validation={item.validation} /></CCol>
+                  return <CCol key={index} sm={4}>
+                    <Input 
+                    name={item.name} 
+                    type={item.type} 
+                    label={item.label} 
+                    id={item.id} 
+                    placeholder={item.placeholder} 
+                    validation={item.validation} change={handleChange} value={userCreated[item.name]} />
+
+                    </CCol>
 
                 })
               }
             </CRow>
-              <CButton onClick={saveUser}>Go somewhere</CButton>
+            <CButton type='submit'>Go somewhere</CButton>
           </form>
         </CCardBody>
       </CCard>
