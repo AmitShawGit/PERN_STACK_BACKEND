@@ -4,6 +4,7 @@ import { CCard, CCardBody, CButton, CRow, CCol, CFormSelect } from '@coreui/reac
 
 const AddUser = () => {
   let [userCreated, setUserCreated] = useState({ name: "", email: "", password: "", mobile: "", address: "", role: "" })
+  let [validate,setValidate] = useState(false)
   let userRegistration = [
     {
       key: 1,
@@ -13,6 +14,7 @@ const AddUser = () => {
       validation: "Please enter full name",
       type: "text",
       name: "name",
+      validate: (value)=> value.trim()!== ""
     },
     {
       key: 2,
@@ -53,7 +55,9 @@ const AddUser = () => {
   ];
   //user entry
   const handleChange = (e) => {
-    setUserCreated((prevData) => ({ ...prevData, [e.target.name]: e.target.value }))
+    let [name,value] = e.target
+    setUserCreated((prevData) => ({ ...prevData, [name]: value }))
+    setValidate(()=>{})
   }
   //Save User
   const saveUser = (e) => {
@@ -78,7 +82,9 @@ const AddUser = () => {
                           label={item.label}
                           id={item.id}
                           placeholder={item.placeholder}
-                          validation={item.validation} change={handleChange} value={userCreated[item.name]} />
+                          validation={item.validation}
+                           change={handleChange}
+                           value={userCreated[item.name]} />
                       </CCol>
 
 
