@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import Input from 'src/components/Input';
 import { CCard, CCardBody, CButton, CRow, CCol, CFormSelect } from '@coreui/react'
+import apiCall from "src/services/index.ts";
 
 const AddUser = () => {
   let [userCreated, setUserCreated] = useState({ name: "", email: "", password: "", mobile: "", address: "", role: "" })
-  let [validate,setValidate] = useState(false)
+
   let userRegistration = [
     {
       key: 1,
@@ -14,7 +15,7 @@ const AddUser = () => {
       validation: "Please enter full name",
       type: "text",
       name: "name",
-      validate: (value)=> value.trim()!== ""
+
     },
     {
       key: 2,
@@ -54,14 +55,18 @@ const AddUser = () => {
     },
   ];
   //user entry
+
   const handleChange = (e) => {
-    let [name,value] = e.target
-    setUserCreated((prevData) => ({ ...prevData, [name]: value }))
-    setValidate(()=>{})
-  }
+    const { name, value } = e.target;
+    setUserCreated((prevData) => ({ ...prevData, [name]: value }));
+  };
+
   //Save User
-  const saveUser = (e) => {
+  const saveUser = async (e) => {
     e.preventDefault();
+    await apiCall.post("create-user", userCreated)
+      .then(res => alert(res.response))
+      .catch((err) => { console.log(err) })
     console.log(userCreated);
   }
   return (
@@ -72,23 +77,21 @@ const AddUser = () => {
           <form onSubmit={saveUser}>
             <CRow>
               {
-                userRegistration.map((item, index) => {
+                userRegistration.map((item) => {
                   return (
-                    <>
-                      <CCol key={index} sm={4}>
-                        <Input
-                          name={item.name}
-                          type={item.type}
-                          label={item.label}
-                          id={item.id}
-                          placeholder={item.placeholder}
-                          validation={item.validation}
-                           change={handleChange}
-                           value={userCreated[item.name]} />
-                      </CCol>
 
+                    <CCol key={item.key} sm={4}>
+                      <Input
+                        name={item.name}
+                        type={item.type}
+                        label={item.label}
+                        id={item.id}
+                        placeholder={item.placeholder}
+                        validation={item.validation}
+                        change={handleChange}
+                        value={userCreated[item.name]} />
+                    </CCol>
 
-                    </>
                   )
 
                 })
