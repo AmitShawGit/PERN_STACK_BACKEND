@@ -18,20 +18,30 @@ import { cilLockLocked, cilUser } from '@coreui/icons'
 import apiCall from 'src/services/index.ts';
 
 const Login = () => {
-    let [userEntry, setUserEntry] = useState({ username: "", password: "" })
+    let [userEntry, setUserEntry] = useState({ email: "", password: "" })
     const navigate = useNavigate()
     const handleChange = (e) => {
         setUserEntry((dataEntry) => ({ ...dataEntry, [e.target.name]: e.target.value }))
     }
     const checkUser = async (e) => {
         e.preventDefault();
-        let email
-        let password
+        let todoonext
         try {
-            await apiCall.get("/user-detail")
+            await apiCall.post("/user-detail", userEntry)
                 .then((res) => {
-                    email = res.response.email
-                    password = res.response.password
+                    todoonext = res.data.response;
+                    if (todoonext === "User email is not valid") {
+                        alert(todoonext)
+                    }
+                    else if (todoonext === "User account is not registered") {
+                        alert(todoonext)
+                    }
+                    else if (todoonext === "you are welcome") {
+                        navigate("/dashboard")
+                    }
+                    else if (todoonext === "User password is not valid") {
+                        alert(todoonext)
+                    }
                 })
                 .catch((err) => console.log(err))
         }
@@ -41,16 +51,6 @@ const Login = () => {
 
 
 
-        if (userEntry.username === email) {
-            if (userEntry.password === password) {
-
-                navigate("/dashboard")
-            } else {
-                alert("wrong password");
-            }
-        } else {
-            alert("wrong email");
-        }
     }
     return (
         <div className="bg-light min-vh-100 d-flex flex-row align-items-center loginBg">
@@ -67,7 +67,7 @@ const Login = () => {
                                             <CInputGroupText>
                                                 <CIcon icon={cilUser} />
                                             </CInputGroupText>
-                                            <CFormInput type='text' placeholder="Username" value={userEntry.username} onChange={handleChange} name='username' />
+                                            <CFormInput type='text' placeholder="Username" value={userEntry.email} onChange={handleChange} name='email' />
                                         </CInputGroup>
                                         <CInputGroup className="mb-4">
                                             <CInputGroupText>
