@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import  { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
     CButton,
     CCard,
@@ -15,23 +15,40 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import apiCall from 'src/services/index.ts';
 
 const Login = () => {
     let [userEntry, setUserEntry] = useState({ username: "", password: "" })
-    const navigate= useNavigate()
+    const navigate = useNavigate()
     const handleChange = (e) => {
         setUserEntry((dataEntry) => ({ ...dataEntry, [e.target.name]: e.target.value }))
     }
-    const checkUser = (e) => {
+    const checkUser = async (e) => {
         e.preventDefault();
-        if(userEntry.username === "mayank@1999"){
-            if(userEntry.password === "1234"){
-         
-                navigate("/dashboard") 
-            }else{
+        let email
+        let password
+        try {
+            await apiCall.get("/user-detail")
+                .then((res) => {
+                    email = res.response.email
+                    password = res.response.password
+                })
+                .catch((err) => console.log(err))
+        }
+        catch (err) {
+            console.log(err);
+        }
+
+
+
+        if (userEntry.username === email) {
+            if (userEntry.password === password) {
+
+                navigate("/dashboard")
+            } else {
                 alert("wrong password");
             }
-        }else{
+        } else {
             alert("wrong email");
         }
     }
@@ -66,7 +83,7 @@ const Login = () => {
                                         </CInputGroup>
                                         <CRow>
                                             <CCol xs={12}>
-                                                <CButton color="primary" className="px-4"  type='submit'>
+                                                <CButton color="primary" className="px-4" type='submit'>
                                                     Login
                                                 </CButton>
                                             </CCol>
