@@ -38,7 +38,7 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'View User',
+    name: 'View Query',
     to: '/theme/view-user',
     icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
   },

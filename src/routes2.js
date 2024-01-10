@@ -17,7 +17,7 @@ const route2 = [
     },
     {
         path:"/theme/view-user",
-        name:"View Users",
+        name:"View Query",
         element: ViewUser
     },
     {
