@@ -4,6 +4,8 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
 const ViewUser = React.lazy(()=> import('./views/usermanagement/ViewUser'));
 const AddUser = React.lazy(()=> import('./views/usermanagement/AddUser'));
 const NewsLetter = React.lazy(()=>import('./views/usermanagement/NewsLetter'));
+//Assignment
+const AddAssignment = React.lazy(()=>import('./views/Assignment/AddAssignment'));
 const route2 = [
     {
         path:"/",
@@ -29,6 +31,16 @@ const route2 = [
     {
         path:"/theme/newsletter",
         name:"Newsletter",
+        element: NewsLetter
+    },
+    {
+        path:"/assignment/add-assignment",
+        name:"Add Assignment",
+        element: AddAssignment
+    },
+    {
+        path:"/assignment/view-assignment",
+        name:"View Assignment",
         element: NewsLetter
     },
 ]

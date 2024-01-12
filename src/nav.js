@@ -51,23 +51,23 @@ const _nav = [
   },
   {
     component: CNavTitle,
-    name: 'Components',
+    name: 'Assignment',
   },
   {
     component: CNavGroup,
-    name: 'Base',
-    to: '/base',
+    name: 'Assignment',
+    to: '/assignment',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Accordion',
-        to: '/base/accordion',
+        name: 'View Assignment',
+        to: '/assignment/view-assignment',
       },
       {
         component: CNavItem,
-        name: 'Breadcrumb',
-        to: '/base/breadcrumbs',
+        name: 'Add Assignment',
+        to: '/assignment/add-assignment',
       },
       {
         component: CNavItem,
