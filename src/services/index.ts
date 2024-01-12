@@ -6,7 +6,8 @@ const apiCall = axios.create({
     headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-        "Accept": "application/json"
+        "Accept": "application/json",
+        'Content-Type': 'multipart/form-data',
     }
 })
 export default apiCall;

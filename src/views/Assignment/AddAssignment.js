@@ -1,8 +1,11 @@
 import { CCard, CCardBody, CButton, CRow, CCol, CFormSelect, CFormTextarea } from '@coreui/react'
 import React, { useState } from 'react'
 import Input from 'src/components/Input'
+import apiCall from 'src/services/index.ts'
 const AddAssignment = () => {
-    let [assignment, setAssignment] = useState({ subject_name: "", semester: "", short_description: "", description: "", image: "", sell_price: "", price: "", })
+    let [assignment, setAssignment] = useState({ subject_name: "", semester: "", short_description: "", description: "", image: null, sell_price: "", price: "", })
+
+
     let assignmentForm = [
         {
             key: 1,
@@ -28,28 +31,38 @@ const AddAssignment = () => {
             placeholder: "Enter Price",
             name: "price",
         },
-        {
-            key: 4,
-            label: "Image",
-            id: "image",
-            type: "file",
-            placeholder: "Enter Image",
-            name: "image",
-        },
     ]
     const handleChange = (e) => {
-        setAssignment((item) => ({ ...item, [e.target.name]: e.target.value }))
+        const { name, value, files } = e.target;
+        setAssignment((item) => ({
+            ...item,
+            [name]: name === 'image' ? files[0] : value,
+        }));
+    };
 
-    }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(assignment);
+        try {
+            const formData = new FormData();
+            for (const key in assignment) {
+                formData.append(key, assignment[key]);
+            }
+            console.log(formData);
+            await apiCall.post("/paid-assignmen", formData)
+                .then((res) => alert(res.data))
+                .catch(err => alert(err.data))
+           
+        }
+        catch (err) {
+            alert(err)
+        }
+
     }
     return (
         <>
             <CCard>
                 <CCardBody>
-                    <form onSubmit={handleSubmit}  encType='multipart/form-data'>
+                    <form onSubmit={handleSubmit} encType='multipart/form-data'>
                         <CRow>
                             {
                                 assignmentForm.map((item) => {
@@ -62,11 +75,17 @@ const AddAssignment = () => {
                                                 id={item.id}
                                                 placeholder={item.placeholder}
                                                 change={handleChange}
-                                                value={assignment[item.name]} />
+                                                value={assignment[item.name]}
+                                            />
                                         </CCol>
                                     )
                                 })
                             }
+
+                            <CCol sm={4}>
+                                <Input type="file" id="image" label="Image" name="image" onChange={handleChange} value={assignment.image} />
+
+                            </CCol>
                             <CCol sm={4}>
                                 <CFormSelect
                                     label="Semester"
