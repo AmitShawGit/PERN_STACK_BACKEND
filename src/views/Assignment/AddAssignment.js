@@ -84,10 +84,7 @@ const AddAssignment = () => {
                                 })
                             }
 
-                            <CCol sm={4}>
-                                <input type="file" id="image" label="Image" name="image" onChange={handleChange} />
-
-                            </CCol>
+                           
                             <CCol sm={4}>
                                 <CFormSelect
                                     label="Semester"
@@ -121,9 +118,12 @@ const AddAssignment = () => {
                                     onChange={handleChange}
                                 ></CFormTextarea>
                             </CCol>
+                            <CCol sm={4}>
+                                <input type="file" id="image" label="Image" name="image" onChange={handleChange} />
 
+                            </CCol>
                         </CRow>
-                        <CButton type='submit'>Save</CButton>
+                        <CButton type='submit' className='mt-3'>Save</CButton>
 
                     </form>
                 </CCardBody>
