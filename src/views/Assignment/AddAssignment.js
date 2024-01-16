@@ -49,9 +49,13 @@ const AddAssignment = () => {
             formData.append(key, assignment[key]);
         }
         try {
-            await apiCall.post("/paid-assignment", formData)
-                .then((res) => alert(res.data))
-                .catch(err => alert(err.data));
+            await apiCall.post("/paid-assignment", formData,{
+                headers:{
+                    'Content-Type': 'multipart/form-data',
+                }
+            })
+                .then((res) => alert(res.data.response))
+                .catch(err => alert(err.data.response));
 
         }
 
@@ -119,7 +123,7 @@ const AddAssignment = () => {
                                 ></CFormTextarea>
                             </CCol>
                             <CCol sm={4}>
-                                <input type="file" id="image" label="Image" name="image" onChange={handleChange} />
+                                <input type="file" id="image" label="Image" name="image" onChange={handleChange} className='form-control' />
 
                             </CCol>
                         </CRow>

@@ -44,12 +44,13 @@ const Login = () => {
                     }
                 })
                 .catch((err) => console.log(err))
+                console.log(userEntry);
         }
         catch (err) {
             console.log(err);
         }
 
-
+      
 
     }
     return (
