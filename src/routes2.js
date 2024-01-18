@@ -4,9 +4,11 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
 const ViewUser = React.lazy(()=> import('./views/usermanagement/ViewUser'));
 const AddUser = React.lazy(()=> import('./views/usermanagement/AddUser'));
 const NewsLetter = React.lazy(()=>import('./views/usermanagement/NewsLetter'));
+
 //Assignment
 const AddAssignment = React.lazy(()=>import('./views/Assignment/AddAssignment'));
-const route2 = [
+const ViewAssignment = React.lazy(()=>import('./views/Assignment/ViewAssignment'));
+const route2 = [ 
     {
         path:"/",
         exact:true,
@@ -41,7 +43,7 @@ const route2 = [
     {
         path:"/assignment/view-assignment",
         name:"View Assignment",
-        element: NewsLetter
+        element: ViewAssignment
     },
 ]
 
