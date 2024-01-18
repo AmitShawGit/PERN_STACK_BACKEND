@@ -1,11 +1,16 @@
-import { CCard, CCardBody, CButton, CRow, CCol, CFormSelect, CFormTextarea } from '@coreui/react'
-import React, { useState } from 'react'
+import { CCard, CFormInput, CContainer, CForm, CCardBody, CButton, CRow, CCol, CFormSelect, CFormTextarea, CModal, CModalBody, CModalTitle, CModalHeader, CModalFooter } from '@coreui/react'
+import CIcon from '@coreui/icons-react';
+import {
+    cilPlus,
+} from '@coreui/icons'
+import React, { useEffect, useState } from 'react'
 import Input from 'src/components/Input'
 import apiCall from 'src/services/index.ts'
 const AddAssignment = () => {
-    let [assignment, setAssignment] = useState({ subject_name: "", semester: "", short_description: "", image: null, description: "", sell_price: "", price: "", })
-
-
+    let [assignment, setAssignment] = useState({ university: "", subject_name: "", semester: "", short_description: "", image: null, description: "", sell_price: "", price: "", })
+    let [visible, setVisible] = useState(false)
+    let [universityName, setUniversityName] = useState({ universityName: "" })
+    let [university, setUniversity] = useState([])
     let assignmentForm = [
         {
             key: 1,
@@ -49,8 +54,8 @@ const AddAssignment = () => {
             formData.append(key, assignment[key]);
         }
         try {
-            await apiCall.post("/paid-assignment", formData,{
-                headers:{
+            await apiCall.post("/paid-assignment", formData, {
+                headers: {
                     'Content-Type': 'multipart/form-data',
                 }
             })
@@ -64,12 +69,62 @@ const AddAssignment = () => {
         }
 
     }
+
+    //get university
+    let getUniversity = () => {
+        apiCall.get('/view-university')
+            .then(res => {
+                setUniversity(res.data.response);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+    let addUniversity = async () => {
+        try {
+            await apiCall.post("/add-university", universityName)
+                .then(res => { alert(res.data.response); getUniversity() })
+                .catch(err => alert(err))
+        }
+        catch (err) {
+            console.log(err);
+        }
+        setVisible(false)
+    }
+    useEffect(() => {
+        getUniversity()
+
+    }, [])
     return (
         <>
             <CCard>
                 <CCardBody>
                     <form onSubmit={handleSubmit} encType="multipart/form-data" method="post">
                         <CRow>
+                            <CCol sm={4}> <CIcon icon={cilPlus} title="Download file" onClick={() => setVisible(!visible)} />
+                                <CFormSelect
+                                    label="Add University"
+                                    name="university"
+                                    onChange={handleChange}
+                                    id="university"
+                                    options={[
+                                        { label: 'Select', value: '' },
+                                        ...university.map((item) => {
+                                            return {
+                                                label: item.name,
+                                                value: item.id
+                                            };
+
+                                        })
+
+                                    ]} />
+
+                            </CCol>
+                            <CCol sm={4}>
+                                <label>Upload Image</label>
+                                <input type="file" id="image" name="image" onChange={handleChange} className='form-control mt-1' />
+
+                            </CCol>
                             {
                                 assignmentForm.map((item) => {
                                     return (
@@ -88,7 +143,7 @@ const AddAssignment = () => {
                                 })
                             }
 
-                           
+
                             <CCol sm={4}>
                                 <CFormSelect
                                     label="Semester"
@@ -122,16 +177,49 @@ const AddAssignment = () => {
                                     onChange={handleChange}
                                 ></CFormTextarea>
                             </CCol>
-                            <CCol sm={4}>
-                                <input type="file" id="image" label="Image" name="image" onChange={handleChange} className='form-control' />
 
-                            </CCol>
                         </CRow>
                         <CButton type='submit' className='mt-3'>Save</CButton>
 
                     </form>
                 </CCardBody>
             </CCard>
+            <CModal
+                visible={visible}
+                onClose={() => setVisible(false)}
+                size="sm"
+            >
+                <CModalHeader onClose={() => setVisible(false)}>
+                    <CModalTitle id="LiveDemoExampleLabel">Add University</CModalTitle>
+                </CModalHeader>
+                <CModalBody>
+                    <CContainer>
+                        <CForm>
+                            <CRow>
+                                <CCol>
+                                    <CFormInput
+                                        type="text"
+                                        label="University Name"
+                                        name="University Name"
+                                        value={university.universityName}
+                                        onChange={(e) => setUniversityName((prevItem) => ({ ...prevItem, universityName: e.target.value }))}
+
+                                    />
+                                </CCol>
+
+
+                            </CRow>
+
+                        </CForm>
+                    </CContainer>
+                </CModalBody>
+                <CModalFooter>
+                    <CButton color="secondary" >
+                        Close
+                    </CButton>
+                    <CButton color="primary" onClick={addUniversity}>Add</CButton>
+                </CModalFooter>
+            </CModal>
 
         </>
     )
