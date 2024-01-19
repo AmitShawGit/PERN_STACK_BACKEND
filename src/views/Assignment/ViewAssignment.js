@@ -4,11 +4,11 @@ import apiCall from "src/services/index.ts";
 
 
 const ViewAssignment = () => {
-  let [row, setRow] = useState([])
+  let [university, setUniversity] = useState([])
   const [visible, setVisible] = useState(false);
   const [view, setView] = useState({ id: "", subject_name: "", semester: "", sell_price: "", price: "" ,short_description:"",description:"",image:""});
   let [subject, setSubject] = useState([])
-
+  let imageURL = process.env.REACT_APP_BASE_URL+"upload/"
   const columns = [
     {
       key: "id",
@@ -40,7 +40,7 @@ const ViewAssignment = () => {
   useEffect(() => {
     apiCall.get('/view-assignment')
       .then(response => {
-        setRow(response.data);
+        setUniversity(response.data);
       })
       .catch(error => {
         console.error(error);
@@ -50,7 +50,7 @@ const ViewAssignment = () => {
 //Select University
 const getSelectedVal = async (event) => {
   let selected = event.target.value;
-  let find = row.find((item) =>{ return item.name === selected});
+  let find = university.find((item) =>{ return item.name === selected});
   if (find) {
       setSubject(find.subjects);
   } else {
@@ -69,19 +69,21 @@ const getSelectedVal = async (event) => {
     )
     )
 
+    //open specific modal
   const handleAction = (id) => {
-    const viewData = row.find(item => item.id === id);
+    const viewData = subject.find(item => item.id === id);
+    console.log(viewData);
     setView(viewData || { id: "", subject_name: "", semester: "", sell_price: "", price: "" ,short_description:"",description:"",image:"" });
     setVisible(true)
   }
-
+//handle update form
   const handelChange = (e) => {
     setView((item) => ({ ...item, [e.target.name]: e.target.value }))
   }
   const updateData = (view) => {
     try {
-      apiCall.put(`/update-user/${view.id}`, view)
-        .then(() => { setRow(prevData => prevData.map(item => item.id === view.id ? view : item)) })
+      apiCall.put(`/view-specific-assignment/${view.id}`, view)
+        .then(() => { setUniversity(prevData => prevData.map(item => item.id === view.id ? view : item)) })
       setVisible(false);
     }
     catch (error) {
@@ -92,7 +94,7 @@ const getSelectedVal = async (event) => {
   const deleteData = (id) => {
     try {
       apiCall.delete(`/delete-user/${id}`)
-        .then(() => { setRow(prevData => prevData.filter(item => item.id !== id)) })
+        .then(() => { setUniversity(prevData => prevData.filter(item => item.id !== id)) })
       setVisible(false);
     }
     catch (error) {
@@ -110,7 +112,7 @@ const getSelectedVal = async (event) => {
         <CCol md={9}>
           <select id="select" className="form-control" onChange={getSelectedVal}>
             <option value="select">Select University</option>
-            {row.map((value) => {
+            {university.map((value) => {
               return (
                 <option key={value?.id} value={value?.name} >{value?.name}</option>
               )
@@ -127,8 +129,7 @@ const getSelectedVal = async (event) => {
       <CModal
         visible={visible}
         onClose={() => setVisible(false)}
-        aria-labelledby="LiveDemoExampleLabel"
-        size="lg"
+        size="xl"
       >
         <CModalHeader onClose={() => setVisible(false)}>
           <CModalTitle id="LiveDemoExampleLabel">View & Edit Subjects</CModalTitle>
@@ -137,44 +138,65 @@ const getSelectedVal = async (event) => {
           <CContainer>
             <CForm>
               <CRow>
-                <CCol md="auto">
+                <CCol md="3">
                   <CFormInput
                     type="text"
-                    label="Name"
+                    label="Subject Name"
                     name="name"
-                    value={view.subject_name}
+                    value={view?.subject_name}
                     onChange={handelChange}
                   />
                 </CCol>
-                <CCol md="auto">
+                <CCol md="3">
                   <CFormInput
-                    type="mail"
-                    name="email"
-                    label="Email address"
-                    value={view.email}
+                    type="text"
+                    name="semester"
+                    label="semester"
+                    value={view?.semester}
                     onChange={handelChange}
                   />
                 </CCol>
-                <CCol md="auto">
+                <CCol md="3">
                   <CFormInput
-                    type="number"
-                    name="phone_no"
-                    label="Mobile Number"
-                    value={view.phone_no}
+                    type="text"
+                    name="sell_price"
+                    label="Sell Price"
+                    value={view?.sell_price}
+                    onChange={handelChange}
+                  />
+                </CCol>
+                <CCol md="3">
+                  <CFormInput
+                    type="text"
+                    name="sell_price"
+                    label="Price"
+                    value={view?.price}
                     onChange={handelChange}
                   />
                 </CCol>
 
               </CRow>
               <CRow>
-                <CCol>
+                <CCol md="6">
                   <CFormTextarea
-                    label="Msg"
+                    label="Short Description"
                     rows={3}
-                    name="msg"
-                    value={view.msg}
+                    name="short_description"
+                    value={view?.short_description}
                     onChange={handelChange}
                   ></CFormTextarea>
+                </CCol>
+                <CCol md="6">
+                  <CFormTextarea
+                    label="Description"
+                    rows={3}
+                    name="description"
+                    value={view?.description}
+                    onChange={handelChange}
+                  ></CFormTextarea>
+                </CCol>
+                <CCol md="6">
+                  <img src={imageURL + view?.image} onChange={handelChange} name="image" alt="imageofpost"/>
                 </CCol>
               </CRow>
             </CForm>
