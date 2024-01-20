@@ -6,9 +6,9 @@ import apiCall from "src/services/index.ts";
 const ViewAssignment = () => {
   let [university, setUniversity] = useState([])
   const [visible, setVisible] = useState(false);
-  const [view, setView] = useState({ id: "", subject_name: "", semester: "", sell_price: "", price: "" ,short_description:"",description:"",image:""});
+  const [view, setView] = useState({ id: "", subject_name: "", semester: "", sell_price: "", price: "", short_description: "", description: "", image: "" });
   let [subject, setSubject] = useState([])
-  let imageURL = process.env.REACT_APP_BASE_URL+"upload/"
+  let imageURL = process.env.REACT_APP_BASE_URL + "upload/"
   const columns = [
     {
       key: "id",
@@ -38,6 +38,11 @@ const ViewAssignment = () => {
 
 
   useEffect(() => {
+    getDataFromApi()
+  }, []);
+
+  //fetch university
+  let getDataFromApi = () => {
     apiCall.get('/view-assignment')
       .then(response => {
         setUniversity(response.data);
@@ -45,44 +50,44 @@ const ViewAssignment = () => {
       .catch(error => {
         console.error(error);
       });
-  }, []);
-
-//Select University
-const getSelectedVal = async (event) => {
-  let selected = event.target.value;
-  let find = university.find((item) =>{ return item.name === selected});
-  if (find) {
-      setSubject(find.subjects);
-  } else {
-      setSubject([]);
   }
-}
+  //Select University
+  const getSelectedVal = async (event) => {
+    let selected = event.target.value;
+    let find = university.find((item) => { return item.name === selected });
+    if (find) {
+      setSubject(find.subjects);
+    } else {
+      setSubject([]);
+    }
+  }
   const tableData = subject.map((data, index) => ({
-  
+
     ...data,
     id: index + 1,
     action: (
       <i className="fa fa-pen" onClick={() => handleAction(data.id)}></i>
-      )
-
-    }
-    )
     )
 
-    //open specific modal
+  }
+  )
+  )
+
+  //open specific modal
   const handleAction = (id) => {
     const viewData = subject.find(item => item.id === id);
     console.log(viewData);
-    setView(viewData || { id: "", subject_name: "", semester: "", sell_price: "", price: "" ,short_description:"",description:"",image:"" });
+    setView(viewData || { id: "", subject_name: "", semester: "", sell_price: "", price: "", short_description: "", description: "", image: "" });
     setVisible(true)
   }
-//handle update form
+
+  //handle update form
   const handelChange = (e) => {
     setView((item) => ({ ...item, [e.target.name]: e.target.value }))
   }
   const updateData = (view) => {
     try {
-      apiCall.put(`/view-specific-assignment/${view.id}`, view)
+      apiCall.put(`/update-specific-assignment/${view.id}`, view)
         .then(() => { setUniversity(prevData => prevData.map(item => item.id === view.id ? view : item)) })
       setVisible(false);
     }
@@ -93,7 +98,7 @@ const getSelectedVal = async (event) => {
   }
   const deleteData = (id) => {
     try {
-      apiCall.delete(`/delete-user/${id}`)
+      apiCall.delete(`/delete-assignment/${id}`)
         .then(() => { setUniversity(prevData => prevData.filter(item => item.id !== id)) })
       setVisible(false);
     }
@@ -196,7 +201,7 @@ const getSelectedVal = async (event) => {
                   ></CFormTextarea>
                 </CCol>
                 <CCol md="6">
-                  <img src={imageURL + view?.image} onChange={handelChange} name="image" alt="imageofpost"/>
+                  <img src={imageURL + view?.image} onChange={handelChange} name="image" alt="imageofpost" />
                 </CCol>
               </CRow>
             </CForm>
