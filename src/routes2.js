@@ -8,6 +8,9 @@ const NewsLetter = React.lazy(()=>import('./views/usermanagement/NewsLetter'));
 //Assignment
 const AddAssignment = React.lazy(()=>import('./views/Assignment/AddAssignment'));
 const ViewAssignment = React.lazy(()=>import('./views/Assignment/ViewAssignment'));
+
+//Payments
+const Payment =React.lazy(()=>import('./views/PO/PurchaseOrder'))
 const route2 = [ 
     {
         path:"/",
@@ -44,6 +47,11 @@ const route2 = [
         path:"/assignment/view-assignment",
         name:"View Assignment",
         element: ViewAssignment
+    },
+    {
+        path:"/po/purchase-order",
+        name:"View Payment",
+        element: Payment
     },
 ]
 
