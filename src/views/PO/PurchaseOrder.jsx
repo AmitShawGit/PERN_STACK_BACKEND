@@ -7,7 +7,8 @@ const PurchaseOrder = () => {
   const [view, setView] = useState({});
 
   //showDetails
-  let showDetails = () => {
+  let showDetails = (val) => {
+    console.log(val);
     setVisible(true)
   }
 
@@ -25,7 +26,17 @@ const PurchaseOrder = () => {
   }
   const getPaymentInfo = async () => {
     try {
-      await apiCall.get("/")
+      await apiCall.get("/paymentinfo")
+        .then((res) => res.response)
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+  const getSpecificPayment = async (id) => {
+    console.log(id);
+    try {
+      await apiCall.get("/api/paymentinfo/:id")
         .then((res) => res.response)
     }
     catch (err) {
@@ -41,7 +52,7 @@ const PurchaseOrder = () => {
     <>
       <CRow>
         <CCol md={4}>
-          <CCard className='paymentCard' onClick={showDetails}>
+          <CCard className='paymentCard' onClick={(e)=>getSpecificPayment(e)}>
             <CCardBody>
               <ul className='list-none'>
                 <li>Subject : Business Studies</li>
