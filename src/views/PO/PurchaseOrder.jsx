@@ -4,8 +4,8 @@ import apiCall from 'src/services/index.ts';
 const PurchaseOrder = () => {
   let [row, setRow] = useState([])
   const [visible, setVisible] = useState(false);
-  const [view, setView] = useState({});
-
+  const [view, setView] = useState({paymentimage:""});
+  let imageURL = process.env.REACT_APP_BASE_URL 
   //showDetails
   let showDetails = (val) => {
     console.log(val);
@@ -35,9 +35,14 @@ const PurchaseOrder = () => {
   }
   const getSpecificPayment = async (id) => {
     console.log(id);
+    setVisible(true)
     try {
       await apiCall.get(`/api/paymentinfo/${id}`)
-        .then((res) => res.response)
+      .then((res) => {
+        setView({ paymentimage: res.data.paymentimage });
+        console.log(view.paymentimage);
+    })
+    
     }
     catch (err) {
       console.log(err);
@@ -80,7 +85,7 @@ const PurchaseOrder = () => {
         </CModalHeader>
         <CModalBody>
           <CContainer>
-
+<img src={imageURL + view?.paymentimage} alt="" />
           </CContainer>
         </CModalBody>
         <CModalFooter>
