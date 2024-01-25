@@ -27,7 +27,7 @@ const PurchaseOrder = () => {
   const getPaymentInfo = async () => {
     try {
       await apiCall.get("/paymentinfo")
-        .then((res) => res.response)
+        .then((res) => {setRow(res.data.response);})
     }
     catch (err) {
       console.log(err);
@@ -36,7 +36,7 @@ const PurchaseOrder = () => {
   const getSpecificPayment = async (id) => {
     console.log(id);
     try {
-      await apiCall.get("/api/paymentinfo/:id")
+      await apiCall.get(`/api/paymentinfo/${id}`)
         .then((res) => res.response)
     }
     catch (err) {
@@ -51,19 +51,23 @@ const PurchaseOrder = () => {
 
     <>
       <CRow>
-        <CCol md={4}>
-          <CCard className='paymentCard' onClick={(e)=>getSpecificPayment(e)}>
+        { row.map((item)=>{
+       return  ( <CCol md={4} key={item.id}>
+          <CCard className='paymentCard' onClick={()=>getSpecificPayment(item.id)}>
             <CCardBody>
               <ul className='list-none'>
-                <li>Subject : Business Studies</li>
-                <li>Price :<span className='text-success'>$600</span> </li>
-                <li>Buyer Name : Amit Shaw</li>
-                <li><i className="fa fa-envelope"></i> amitshaw@gmail.com</li>
-                <li><i className="fa fa-phone"></i> 8918769445</li>
+                <li>Subject : {item.subject}</li>
+                <li>Price :{item.price} </li>
+                <li>Amount Paid :<span className='text-success'>{item.amount}</span> </li>
+                <li>Buyer Name : {item.name}</li>
+                <li><i className="fa fa-envelope"></i> {item.email}</li>
+                <li><i className="fa fa-phone"></i> {item.contact}</li>
               </ul>
             </CCardBody>
           </CCard>
-        </CCol>
+        </CCol>)
+        })}
+        
       </CRow>
       <CModal
         visible={visible}
