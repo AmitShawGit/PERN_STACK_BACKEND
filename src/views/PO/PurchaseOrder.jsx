@@ -44,11 +44,18 @@ const PurchaseOrder = () => {
 
   }
   //search
+
   const searchItem = (e) => {
-    let searchQuery = e.target.value;
-    let dataSearch = row.filter(item => item === searchQuery)
-    console.log(dataSearch);
+    let searchQuery = e.target.value.toLowerCase();
+    let dataSearch = row.filter(item =>
+      item.subject.toLowerCase().includes(searchQuery) || item.name.toLowerCase().includes(searchQuery) || item.email.includes(searchQuery)
+
+    );
+    setRow(dataSearch)
+    
   }
+
+
   //call api
   useEffect(() => {
     getPaymentInfo()
