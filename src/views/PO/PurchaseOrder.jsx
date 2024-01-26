@@ -4,21 +4,10 @@ import apiCall from 'src/services/index.ts';
 const PurchaseOrder = () => {
   let [row, setRow] = useState([])
   const [visible, setVisible] = useState(false);
-  const [view, setView] = useState({ paymentimage: "" });
+  const [view, setView] = useState({ id: "", paymentimage: "" });
   let imageURL = process.env.REACT_APP_BASE_URL
- 
-  const deleteData = (id) => {
-    try {
-      apiCall.delete(`/delete-user/${id}`)
-        .then(() => { setRow(prevData => prevData.filter(item => item.id !== id)) })
-      setVisible(false);
-    }
-    catch (error) {
-      console.log(error);
-    }
 
 
-  }
   const getPaymentInfo = async () => {
     try {
       await apiCall.get("/paymentinfo")
@@ -34,8 +23,7 @@ const PurchaseOrder = () => {
     try {
       await apiCall.get(`/api/paymentinfo/${id}`)
         .then((res) => {
-          setView({ paymentimage: res.data.paymentimage });
-          console.log(view.paymentimage);
+          setView({ paymentimage: res.data.paymentimage, id: res.data.id });
         })
 
     }
@@ -43,7 +31,24 @@ const PurchaseOrder = () => {
       console.log(err);
     }
   }
+  const deleteData = (id) => {
+    try {
+      apiCall.delete(`/delete-payment/${id}`)
+        .then(() => { setRow(prevData => prevData.filter(item => item.id !== id)) })
+      setVisible(false);
+    }
+    catch (error) {
+      console.log(error);
+    }
 
+
+  }
+  //search
+  const searchItem = (e) => {
+    let searchQuery = e.target.value;
+    let dataSearch = row.filter(item => item === searchQuery)
+    console.log(dataSearch);
+  }
   //call api
   useEffect(() => {
     getPaymentInfo()
@@ -51,6 +56,9 @@ const PurchaseOrder = () => {
   return (
 
     <>
+      <div className="searchBars">
+        <input type="text" onChange={searchItem} />
+      </div>
       <CRow>
         {row.map((item) => {
           return (<CCol md={4} key={item.id}>
@@ -81,7 +89,7 @@ const PurchaseOrder = () => {
         </CModalHeader>
         <CModalBody>
           <CContainer>
-            <img src={imageURL + view?.paymentimage} alt="" />
+            <img src={imageURL + view?.paymentimage} alt="" className='img-fluid' />
           </CContainer>
         </CModalBody>
         <CModalFooter>
