@@ -4,14 +4,9 @@ import apiCall from 'src/services/index.ts';
 const PurchaseOrder = () => {
   let [row, setRow] = useState([])
   const [visible, setVisible] = useState(false);
-  const [view, setView] = useState({paymentimage:""});
-  let imageURL = process.env.REACT_APP_BASE_URL 
-  //showDetails
-  let showDetails = (val) => {
-    console.log(val);
-    setVisible(true)
-  }
-
+  const [view, setView] = useState({ paymentimage: "" });
+  let imageURL = process.env.REACT_APP_BASE_URL
+ 
   const deleteData = (id) => {
     try {
       apiCall.delete(`/delete-user/${id}`)
@@ -27,7 +22,7 @@ const PurchaseOrder = () => {
   const getPaymentInfo = async () => {
     try {
       await apiCall.get("/paymentinfo")
-        .then((res) => {setRow(res.data.response);})
+        .then((res) => { setRow(res.data.response); })
     }
     catch (err) {
       console.log(err);
@@ -38,16 +33,17 @@ const PurchaseOrder = () => {
     setVisible(true)
     try {
       await apiCall.get(`/api/paymentinfo/${id}`)
-      .then((res) => {
-        setView({ paymentimage: res.data.paymentimage });
-        console.log(view.paymentimage);
-    })
-    
+        .then((res) => {
+          setView({ paymentimage: res.data.paymentimage });
+          console.log(view.paymentimage);
+        })
+
     }
     catch (err) {
       console.log(err);
     }
   }
+
   //call api
   useEffect(() => {
     getPaymentInfo()
@@ -56,23 +52,23 @@ const PurchaseOrder = () => {
 
     <>
       <CRow>
-        { row.map((item)=>{
-       return  ( <CCol md={4} key={item.id}>
-          <CCard className='paymentCard' onClick={()=>getSpecificPayment(item.id)}>
-            <CCardBody>
-              <ul className='list-none'>
-                <li>Subject : {item.subject}</li>
-                <li>Price :{item.price} </li>
-                <li>Amount Paid :<span className='text-success'>{item.amount}</span> </li>
-                <li>Buyer Name : {item.name}</li>
-                <li><i className="fa fa-envelope"></i> {item.email}</li>
-                <li><i className="fa fa-phone"></i> {item.contact}</li>
-              </ul>
-            </CCardBody>
-          </CCard>
-        </CCol>)
+        {row.map((item) => {
+          return (<CCol md={4} key={item.id}>
+            <CCard className='paymentCard' onClick={() => getSpecificPayment(item.id)}>
+              <CCardBody>
+                <ul className='list-none'>
+                  <li>Subject : {item.subject}</li>
+                  <li>Price :{item.price} </li>
+                  <li>Amount Paid :<span className='text-success'>{item.amount}</span> </li>
+                  <li>Buyer Name : {item.name}</li>
+                  <li><i className="fa fa-envelope"></i> {item.email}</li>
+                  <li><i className="fa fa-phone"></i> {item.contact}</li>
+                </ul>
+              </CCardBody>
+            </CCard>
+          </CCol>)
         })}
-        
+
       </CRow>
       <CModal
         visible={visible}
@@ -85,7 +81,7 @@ const PurchaseOrder = () => {
         </CModalHeader>
         <CModalBody>
           <CContainer>
-<img src={imageURL + view?.paymentimage} alt="" />
+            <img src={imageURL + view?.paymentimage} alt="" />
           </CContainer>
         </CModalBody>
         <CModalFooter>

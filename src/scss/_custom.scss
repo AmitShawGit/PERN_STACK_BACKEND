@@ -7,8 +7,15 @@ background-size: cover;
 .list-none{
     list-style:none;
     padding-left: 0;
+    margin-bottom: 0;
 }
 .paymentCard{
     margin-bottom: 2%;
     cursor: pointer;
+    .fa-envelope{
+        color: #07078b;
+    }
+    .fa-phone{
+        color: green;
+    }
 }
