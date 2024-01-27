@@ -29,7 +29,7 @@ const _nav = [
   },
   {
     component: CNavTitle,
-    name: 'Theme',
+    name: 'Main',
   },
   {
     component: CNavItem,
@@ -68,14 +68,7 @@ const _nav = [
         component: CNavItem,
         name: 'Add Assignment',
         to: '/assignment/add-assignment',
-      },
-
-     
-     
-   
-     
-     
-    
+      },   
     ],
   },
   {
@@ -91,6 +84,10 @@ const _nav = [
       },
     
     ],
+  },
+  {
+    component: CNavTitle,
+    name: 'Pdf',
   },
   {
     component: CNavGroup,
