@@ -97,45 +97,14 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Add Free Pdf',
-        to: '/forms/form-control',
+        to: '/pdf/addpdf',
       },
       {
         component: CNavItem,
         name: 'View Free Pdf',
-        to: '/forms/select',
+        to: '/pdf/viewpdf',
       },
       
-      //delte bottom
-      {
-        component: CNavItem,
-        name: 'Checks & Radios',
-        to: '/forms/checks-radios',
-      },
-      {
-        component: CNavItem,
-        name: 'Range',
-        to: '/forms/range',
-      },
-      {
-        component: CNavItem,
-        name: 'Input Group',
-        to: '/forms/input-group',
-      },
-      {
-        component: CNavItem,
-        name: 'Floating Labels',
-        to: '/forms/floating-labels',
-      },
-      {
-        component: CNavItem,
-        name: 'Layout',
-        to: '/forms/layout',
-      },
-      {
-        component: CNavItem,
-        name: 'Validation',
-        to: '/forms/validation',
-      },
     ],
   },
   {

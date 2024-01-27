@@ -11,6 +11,11 @@ const ViewAssignment = React.lazy(()=>import('./views/Assignment/ViewAssignment'
 
 //Payments
 const Payment =React.lazy(()=>import('./views/PO/PurchaseOrder'))
+
+
+//PDF
+const AddFreePdf = React.lazy(()=>import('./views/Freepdf/AddFreePdf'));
+const ViewFreePdf = React.lazy(()=>import('./views/Freepdf/ViewFreePdf'));
 const route2 = [ 
     {
         path:"/",
@@ -52,6 +57,16 @@ const route2 = [
         path:"/po/purchase-order",
         name:"View Payment",
         element: Payment
+    },
+    {
+        path:"/pdf/addpdf",
+        name:"Add Free Pdf",
+        element: AddFreePdf
+    },
+    {
+        path:"/pdf/viewpdf",
+        name:"View Free Pdf",
+        element: ViewFreePdf
     },
 ]
 
