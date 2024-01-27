@@ -91,19 +91,21 @@ const _nav = [
   },
   {
     component: CNavGroup,
-    name: 'Forms',
+    name: 'Free Pdf',
     icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Form Control',
+        name: 'Add Free Pdf',
         to: '/forms/form-control',
       },
       {
         component: CNavItem,
-        name: 'Select',
+        name: 'View Free Pdf',
         to: '/forms/select',
       },
+      
+      //delte bottom
       {
         component: CNavItem,
         name: 'Checks & Radios',
