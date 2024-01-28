@@ -29,7 +29,7 @@ const _nav = [
   },
   {
     component: CNavTitle,
-    name: 'Main',
+    name: 'User Management',
   },
   {
     component: CNavItem,
@@ -39,7 +39,7 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'View Query',
+    name: 'View User',
     to: '/theme/view-user',
     icon: <CIcon icon={cilFlagAlt} customClassName="nav-icon" />,
   },

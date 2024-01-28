@@ -30,7 +30,7 @@ const route2 = [
     },
     {
         path:"/theme/view-user",
-        name:"View Query",
+        name:"View User",
         element: ViewUser
     },
     {
