@@ -65,7 +65,7 @@ const AddUser = () => {
   const saveUser = async (e) => {
     e.preventDefault();
     await apiCall.post("create-user", userCreated)
-      .then(res => alert(res.response))
+      .then(res => alert(res.data))
       .catch((err) => { console.log(err) })
     console.log(userCreated);
   }
