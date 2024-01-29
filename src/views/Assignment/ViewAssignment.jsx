@@ -173,7 +173,7 @@ const ViewAssignment = () => {
                 <CCol md="3">
                   <CFormInput
                     type="text"
-                    name="sell_price"
+                    name="price"
                     label="Price"
                     value={view?.price}
                     onChange={handelChange}

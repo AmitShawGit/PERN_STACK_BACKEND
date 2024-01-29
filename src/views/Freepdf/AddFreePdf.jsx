@@ -22,19 +22,11 @@ const AddFreePdf = () => {
         },
         {
             key: 2,
-            label: "Sell Price",
-            id: "sell_price",
-            type: "number",
-            placeholder: "Enter Sell Price",
-            name: "sell_price",
-        },
-        {
-            key: 3,
-            label: "Price",
-            id: "price",
-            type: "number",
-            placeholder: "Enter Price",
-            name: "price",
+            label: "Link of pdf",
+            id: "pdf",
+            type: "text",
+            placeholder: "Enter Link",
+            name: "pdf",
         },
     ]
     const handleChange = (e) => {
@@ -54,7 +46,7 @@ const AddFreePdf = () => {
             formData.append(key, assignment[key]);
         }
         try {
-            await apiCall.post("/paid-assignment", formData, {
+            await apiCall.post("/free-pdf", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 }
@@ -72,7 +64,7 @@ const AddFreePdf = () => {
 
     //get university
     let getUniversity = () => {
-        apiCall.get('/view-university')
+        apiCall.get('/view-free-university')
             .then(res => {
                 setUniversity(res.data.response);
             })
@@ -82,7 +74,7 @@ const AddFreePdf = () => {
     }
     let addUniversity = async () => {
         try {
-            await apiCall.post("/add-university", universityName)
+            await apiCall.post("/add-free-university", universityName)
                 .then(res => { alert(res.data.response); getUniversity() })
                 .catch(err => alert(err))
         }

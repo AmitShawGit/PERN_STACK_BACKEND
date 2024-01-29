@@ -25,11 +25,6 @@ const ViewFreePdf = () => {
       _props: { scope: "col" },
     },
     {
-      key: "sell_price",
-      label: "Sell Price",
-      _props: { scope: "col" },
-    },
-    {
       key: "action",
       label: "Action",
       _props: { scope: "col" },
@@ -43,7 +38,7 @@ const ViewFreePdf = () => {
 
   //fetch university
   let getDataFromApi = () => {
-    apiCall.get('/view-assignment')
+    apiCall.get('/view-free-pdf')
       .then(response => {
         setUniversity(response.data);
       })
@@ -77,7 +72,7 @@ const ViewFreePdf = () => {
   const handleAction = (id) => {
     const viewData = subject.find(item => item.id === id);
     console.log(viewData);
-    setView(viewData || { id: "", subject_name: "", semester: "", sell_price: "", price: "", short_description: "", description: "", image: "" });
+    setView(viewData || { id: "", subject_name: "", semester: "",  pdf: "", short_description: "", description: "", image: "" });
     setVisible(true)
   }
 
@@ -87,7 +82,7 @@ const ViewFreePdf = () => {
   }
   const updateData = (view) => {
     try {
-      apiCall.put(`/update-specific-assignment/${view.id}`, view)
+      apiCall.put(`/update-specific-freepdf/${view.id}`, view)
         .then(() => { setUniversity(prevData => prevData.map(item => item.id === view.id ? view : item)) })
       setVisible(false);
     }
@@ -98,7 +93,7 @@ const ViewFreePdf = () => {
   }
   const deleteData = (id) => {
     try {
-      apiCall.delete(`/delete-assignment/${id}`)
+      apiCall.delete(`/delete-freepdf/${id}`)
         .then(() => { setUniversity(prevData => prevData.filter(item => item.id !== id)) })
       setVisible(false);
     }
@@ -161,21 +156,13 @@ const ViewFreePdf = () => {
                     onChange={handelChange}
                   />
                 </CCol>
+                
                 <CCol md="3">
                   <CFormInput
                     type="text"
-                    name="sell_price"
-                    label="Sell Price"
-                    value={view?.sell_price}
-                    onChange={handelChange}
-                  />
-                </CCol>
-                <CCol md="3">
-                  <CFormInput
-                    type="text"
-                    name="sell_price"
-                    label="Price"
-                    value={view?.price}
+                    name="pdf"
+                    label="PDF Link"
+                    value={view?.pdf}
                     onChange={handelChange}
                   />
                 </CCol>
