@@ -2,7 +2,6 @@ import React from 'react'
 import CIcon from '@coreui/icons-react'
 import {
   cilCursor,
-  cilDescription,
   cilDrop,
   cilFlagAlt,
   cilNotes,
@@ -110,7 +109,7 @@ const _nav = [
  
   {
     component: CNavTitle,
-    name: 'Extras',
+    name: 'Reviews',
   },
   {
     component: CNavGroup,
@@ -119,24 +118,19 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Login',
-        to: '/login',
+        name: 'Add Review',
+        to: '/add-review',
       },
       {
         component: CNavItem,
-        name: 'Register',
-        to: '/register',
+        name: 'View Review',
+        to: '/view-review',
       },
 
       
     ],
   },
-  {
-    component: CNavItem,
-    name: 'Docs',
-    href: 'https://coreui.io/react/docs/templates/installation/',
-    icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
-  },
+ 
 ]
 
 export default _nav

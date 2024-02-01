@@ -16,6 +16,11 @@ const Payment =React.lazy(()=>import('./views/PO/PurchaseOrder'))
 //PDF
 const AddFreePdf = React.lazy(()=>import('./views/Freepdf/AddFreePdf'));
 const ViewFreePdf = React.lazy(()=>import('./views/Freepdf/ViewFreePdf'));
+
+
+//Review
+const AddReview = React.lazy(()=>import('./views/Reviews/AddReview'));
+const ViewReview = React.lazy(()=>import('./views/Reviews/ViewReview'));
 const route2 = [ 
     {
         path:"/",
@@ -67,6 +72,16 @@ const route2 = [
         path:"/pdf/viewpdf",
         name:"View Free Pdf",
         element: ViewFreePdf
+    },
+    {
+        path:"/view-review",
+        name:"View Review",
+        element: ViewReview
+    },
+    {
+        path:"/add-review",
+        name:"Add Review",
+        element: AddReview
     },
 ]
 
