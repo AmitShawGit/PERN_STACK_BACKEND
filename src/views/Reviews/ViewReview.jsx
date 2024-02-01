@@ -7,7 +7,7 @@ const ViewReview = () => {
     let [row, setRow] = useState([])
     const [visible, setVisible] = useState(false);
     const [view, setView] = useState({ id: "", user_name: "", user_comment: "" });
-
+    let imageURL = process.env.REACT_APP_BASE_URL + "upload/"
 
     const columns = [
         {
@@ -122,7 +122,12 @@ const ViewReview = () => {
                                         onChange={handelChange}
                                     />
                                 </CCol>
+                            </CRow>
+                            <CRow>
 
+                                <CCol md="auto" className="mt-5">
+                                    <img src={imageURL + view?.image} onChange={handelChange} name="image" alt="imageofpost" />
+                                </CCol>
                             </CRow>
 
                         </CForm>
