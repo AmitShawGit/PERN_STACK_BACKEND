@@ -103,9 +103,6 @@ const _nav = [
       
     ],
   },
-
- 
- 
  
   {
     component: CNavTitle,
@@ -130,7 +127,25 @@ const _nav = [
       
     ],
   },
- 
+  {
+    component: CNavTitle,
+    name: 'Others',
+  },
+  {
+    component: CNavGroup,
+    name: 'Others',
+    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'View Callback Request',
+        to: '/view-call-back',
+      },
+     
+
+      
+    ],
+  },
 ]
 
 export default _nav
