@@ -2,13 +2,13 @@ import React from 'react'
 import CIcon from '@coreui/icons-react'
 import {
   cilCursor,
-  cilDrop,
+  cilUserPlus,
   cilFlagAlt,
   cilNotes,
   cilEnvelopeClosed,
   cilPuzzle,
   cilSpeedometer,
-  cilStar,
+  cilStar,cilHappy
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -31,20 +31,15 @@ const _nav = [
     component: CNavItem,
     name: 'Add User',
     to: '/theme/add-user',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilUserPlus} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'View User',
     to: '/theme/view-user',
-    icon: <CIcon icon={cilFlagAlt} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilHappy} customClassName="nav-icon" />,
   },
-  {
-    component: CNavItem,
-    name: 'Newsletter Request',
-    to: '/theme/newsletter',
-    icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
-  },
+
   {
     component: CNavTitle,
     name: 'Assignment',
@@ -64,7 +59,7 @@ const _nav = [
         component: CNavItem,
         name: 'Add Assignment',
         to: '/assignment/add-assignment',
-      },   
+      },
     ],
   },
   {
@@ -78,7 +73,7 @@ const _nav = [
         name: 'View Payments',
         to: '/po/purchase-order',
       },
-    
+
     ],
   },
   {
@@ -100,10 +95,10 @@ const _nav = [
         name: 'View Free Pdf',
         to: '/pdf/viewpdf',
       },
-      
+
     ],
   },
- 
+
   {
     component: CNavTitle,
     name: 'Reviews',
@@ -124,7 +119,7 @@ const _nav = [
         to: '/view-review',
       },
 
-      
+
     ],
   },
   {
@@ -141,11 +136,23 @@ const _nav = [
         name: 'View Callback Request',
         to: '/view-call-back',
       },
-     
+      {
+        component: CNavItem,
+        name: 'Newsletter Request',
+        to: '/theme/newsletter',
+        icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'View Query',
+        to: '/theme/view-query',
+        icon: <CIcon icon={cilFlagAlt} customClassName="nav-icon" />,
+      },
 
-      
     ],
   },
+
+
 ]
 
 export default _nav

@@ -2,9 +2,8 @@ import React from 'react';
 
 // import Dashboard from './views/dashboard/Dashboard';
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
-const ViewUser = React.lazy(()=> import('./views/usermanagement/ViewUser'));
 const AddUser = React.lazy(()=> import('./views/usermanagement/AddUser'));
-const NewsLetter = React.lazy(()=>import('./views/usermanagement/NewsLetter'));
+const ViewUser = React.lazy(()=> import('./views/usermanagement/ViewUser'));
 
 //Assignment
 const AddAssignment = React.lazy(()=>import('./views/Assignment/AddAssignment'));
@@ -25,6 +24,10 @@ const ViewReview = React.lazy(()=>import('./views/Reviews/ViewReview'));
 
 //Others
 const  ViewCallBack = React.lazy(()=>import('./views/Others/ViewCallBack'));
+const NewsLetter = React.lazy(()=>import('./views/usermanagement/NewsLetter'));
+const ViewQuery = React.lazy(()=> import('./views/usermanagement/ViewQuery'));
+
+
 const route2 = [ 
     {
         path:"/",
@@ -91,6 +94,11 @@ const route2 = [
         path:"/view-call-back",
         name:"View Call Back",
         element: ViewCallBack
+    },
+    {
+        path:"/theme/view-query",
+        name:"View Query",
+        element: ViewQuery
     },
 ]
 
