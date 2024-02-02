@@ -45,7 +45,7 @@ const ViewUser = () => {
   useEffect(() => {
     apiCall.get('/view-query')
       .then(response => {
-        setRow(response.data);
+        setRow(response.data.response);
       })
       .catch(error => {
         console.error(error);
