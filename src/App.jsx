@@ -2,6 +2,7 @@ import React, { Component, Suspense } from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import './scss/style.scss'
 import PrivateRoute from './views/PrivateAuth/PrivateRoute'
+// import PrivateRoute from './PrivateRoute'
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
@@ -22,7 +23,7 @@ class App extends Component {
           <Routes>
             <Route exact path="/" name="Login Page" element={<Login />} />
             <Route exact path="/login" name="Login Page" element={<Login />} />
-            <Route exact path='/auth' element={<PrivateRoute />}>
+            <Route exact path='/auth' name="all page" element={<PrivateRoute />}>
               <Route path="*" name="Home" element={<DefaultLayout />} />
             </Route>
           </Routes>

@@ -31,20 +31,24 @@ const Login = () => {
                 .then((res) => {
                     todoonext = res.data.response;
                     if (todoonext === "User email is not valid") {
+                        localStorage.setItem("auth",false)
                         alert(todoonext)
                     }
                     else if (todoonext === "User account is not registered") {
+                        localStorage.setItem("auth",false)
                         alert(todoonext)
                     }
                     else if (todoonext === "you are welcome") {
+                        localStorage.setItem("auth","Your are most Welcome " + true)
                         navigate("/auth/dashboard")
                     }
                     else if (todoonext === "User password is not valid") {
+                        localStorage.setItem("auth",false)
                         alert(todoonext)
                     }
                 })
                 .catch((err) => console.log(err))
-                console.log(userEntry);
+              
         }
         catch (err) {
             console.log(err);
