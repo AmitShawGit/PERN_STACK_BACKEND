@@ -53,12 +53,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'View Assignment',
-        to: '/assignment/view-assignment',
+        to: '/auth/assignment/view-assignment',
       },
       {
         component: CNavItem,
         name: 'Add Assignment',
-        to: '/assignment/add-assignment',
+        to: '/auth/assignment/add-assignment',
       },
     ],
   },
@@ -71,7 +71,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'View Payments',
-        to: '/po/purchase-order',
+        to: '/auth/po/purchase-order',
       },
 
     ],
@@ -88,12 +88,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Add Free Pdf',
-        to: '/pdf/addpdf',
+        to: '/auth/pdf/addpdf',
       },
       {
         component: CNavItem,
         name: 'View Free Pdf',
-        to: '/pdf/viewpdf',
+        to: '/auth/pdf/viewpdf',
       },
 
     ],
@@ -111,12 +111,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Add Review',
-        to: '/add-review',
+        to: '/auth/add-review',
       },
       {
         component: CNavItem,
         name: 'View Review',
-        to: '/view-review',
+        to: '/auth/view-review',
       },
 
 
@@ -134,18 +134,18 @@ const _nav = [
       {
         component: CNavItem,
         name: 'View Callback Request',
-        to: '/view-call-back',
+        to: '/auth/view-call-back',
       },
       {
         component: CNavItem,
         name: 'Newsletter Request',
-        to: '/theme/newsletter',
+        to: '/auth/theme/newsletter',
         icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
       },
       {
         component: CNavItem,
         name: 'View Query',
-        to: '/theme/view-query',
+        to: '/auth/theme/view-query',
         icon: <CIcon icon={cilFlagAlt} customClassName="nav-icon" />,
       },
 
