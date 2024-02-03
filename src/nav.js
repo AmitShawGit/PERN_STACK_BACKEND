@@ -16,7 +16,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Dashboard',
-    to: '/dashboard',
+    to: '/auth/dashboard',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
     badge: {
       color: 'info',
@@ -30,13 +30,13 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Add User',
-    to: '/theme/add-user',
+    to: '/auth/theme/add-user',
     icon: <CIcon icon={cilUserPlus} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'View User',
-    to: '/theme/view-user',
+    to: '/auth/theme/view-user',
     icon: <CIcon icon={cilHappy} customClassName="nav-icon" />,
   },
 
@@ -47,7 +47,7 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Assignment',
-    to: '/assignment',
+    to: '/auth/assignment',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
     items: [
       {

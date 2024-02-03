@@ -30,23 +30,23 @@ const ViewQuery = React.lazy(()=> import('./views/usermanagement/ViewQuery'));
 
 const route2 = [ 
     {
-        path:"/",
+        path:"/auth",
         exact:true,
         name:"Dashboard",
         element: Dashboard
     },
     {
-        path:"/dashboard",
+        path:"/auth/dashboard",
         name:"Dashboard",
         element: Dashboard
     },
     {
-        path:"/theme/view-user",
+        path:"/auth/theme/view-user",
         name:"View User",
         element: ViewUser
     },
     {
-        path:"/theme/add-user",
+        path:"/auth/theme/add-user",
         name:"Add Users",
         element: AddUser
     },

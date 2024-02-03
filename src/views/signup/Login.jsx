@@ -37,7 +37,7 @@ const Login = () => {
                         alert(todoonext)
                     }
                     else if (todoonext === "you are welcome") {
-                        navigate("/dashboard")
+                        navigate("/auth/dashboard")
                     }
                     else if (todoonext === "User password is not valid") {
                         alert(todoonext)
