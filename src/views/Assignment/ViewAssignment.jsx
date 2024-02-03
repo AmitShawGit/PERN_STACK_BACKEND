@@ -76,7 +76,6 @@ const ViewAssignment = () => {
   //open specific modal
   const handleAction = (id) => {
     const viewData = subject.find(item => item.id === id);
-    console.log(viewData);
     setView(viewData || { id: "", subject_name: "", semester: "", sell_price: "", price: "", short_description: "", description: "", image: "" });
     setVisible(true)
   }
@@ -88,7 +87,12 @@ const ViewAssignment = () => {
   const updateData = (view) => {
     try {
       apiCall.put(`/update-specific-assignment/${view.id}`, view)
-        .then(() => { setUniversity(prevData => prevData.map(item => item.id === view.id ? view : item)) })
+        .then(() => {
+          setTimeout(()=>{
+            setUniversity(prevData => prevData.map(item => item.id === view.id ? view : item)) 
+          },1000)
+
+          })
       setVisible(false);
     }
     catch (error) {
@@ -201,7 +205,7 @@ const ViewAssignment = () => {
                   ></CFormTextarea>
                 </CCol>
                 <CCol md="6">
-                  <img src={imageURL + view?.image} onChange={handelChange} name="image" alt="imageofpost" />
+                  <img src={imageURL + view?.image} onChange={handelChange} name="image" alt="imageofpost" className="img-fluid" />
                 </CCol>
               </CRow>
             </CForm>
