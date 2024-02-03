@@ -6,7 +6,7 @@ import apiCall from "src/services/index.ts";
 const ViewUser = () => {
   let [row, setRow] = useState([])
   const [visible, setVisible] = useState(false);
-  const [view, setView] = useState({ id: "", name: "", msg: "", email: "", phone_no: "" });
+  const [view, setView] = useState({ id: "", name: "", phone_no: "", email: "", role: "" , address:"" });
 
 
   const columns = [
@@ -30,8 +30,8 @@ const ViewUser = () => {
       _props: { scope: "col" },
     },
     {
-      key: "msg",
-      label: "Query",
+      key: "role",
+      label: "Role",
       _props: { scope: "col" },
     },
     {
@@ -63,7 +63,7 @@ const ViewUser = () => {
 
   const handleAction = (id) => {
     const viewData = row.find(item => item.id === id);
-    setView(viewData || { id: "", name: "", msg: "", email: "", phone_no: "" });
+    setView(viewData || { id: "", name: "", phone_no: "", email: "", role: "" , address:"" });
     setVisible(true)
   }
 
@@ -72,7 +72,7 @@ const ViewUser = () => {
   }
   const updateData = (view) => {
     try {
-      apiCall.put(`/update-user/${view.id}`, view)
+      apiCall.put(`/update-specific-query/${view.id}`, view)
         .then(() => { setRow(prevData => prevData.map(item => item.id === view.id ? view : item)) })
       setVisible(false);
     }
@@ -83,7 +83,7 @@ const ViewUser = () => {
   }
   const deleteData = (id) => {
     try {
-      apiCall.delete(`/delete-user/${id}`)
+      apiCall.delete(`/delete-query/${id}`)
         .then(() => { setRow(prevData => prevData.filter(item => item.id !== id)) })
       setVisible(false);
     }
@@ -141,12 +141,21 @@ const ViewUser = () => {
 
               </CRow>
               <CRow>
+              <CCol md="auto">
+                  <CFormInput
+                    type="text"
+                    name="role"
+                    label="Role"
+                    value={view.role}
+                    onChange={handelChange} disabled
+                  />
+                </CCol>
                 <CCol>
                   <CFormTextarea
-                    label="Msg"
+                    label="Address"
                     rows={3}
-                    name="msg"
-                    value={view.msg}
+                    name="address"
+                    value={view.address}
                     onChange={handelChange}
                   ></CFormTextarea>
                 </CCol>
