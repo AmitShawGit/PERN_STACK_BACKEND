@@ -3,10 +3,8 @@ import CIcon from '@coreui/icons-react'
 import {
   cilCursor,
   cilUserPlus,
-  cilFlagAlt,
   cilNotes,
-  cilEnvelopeClosed,
-  cilPuzzle,
+  cilPuzzle,cilCouch,
   cilSpeedometer,
   cilStar,cilHappy
 } from '@coreui/icons'
@@ -129,7 +127,7 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Others',
-    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilCouch} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
@@ -140,13 +138,13 @@ const _nav = [
         component: CNavItem,
         name: 'Newsletter Request',
         to: '/auth/theme/newsletter',
-        icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+        
       },
       {
         component: CNavItem,
         name: 'View Query',
         to: '/auth/theme/view-query',
-        icon: <CIcon icon={cilFlagAlt} customClassName="nav-icon" />,
+
       },
 
     ],

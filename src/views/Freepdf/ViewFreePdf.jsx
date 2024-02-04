@@ -188,7 +188,7 @@ const ViewFreePdf = () => {
                   ></CFormTextarea>
                 </CCol>
                 <CCol md="6">
-                  <img src={imageURL + view?.image} onChange={handelChange} name="image" alt="imageofpost" />
+                  <img src={imageURL + view?.image} onChange={handelChange} name="image" alt="imageofpost" className="img-fluid"/>
                 </CCol>
               </CRow>
             </CForm>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CModal, CButton, CModalBody, CModalTitle, CModalHeader, CModalFooter, CContainer, CRow, CCol, CCard, CCardBody } from '@coreui/react';
 import apiCall from 'src/services/index.ts';
+
 const PurchaseOrder = () => {
   let [row, setRow] = useState([])
   const [visible, setVisible] = useState(false);
@@ -11,14 +12,15 @@ const PurchaseOrder = () => {
   const getPaymentInfo = async () => {
     try {
       await apiCall.get("/paymentinfo")
-        .then((res) => { setRow(res.data.response); })
+        .then((res) => { 
+          setRow(res.data.response);
+        })
     }
     catch (err) {
       console.log(err);
     }
   }
   const getSpecificPayment = async (id) => {
-    console.log(id);
     setVisible(true)
     try {
       await apiCall.get(`/api/paymentinfo/${id}`)
@@ -52,7 +54,7 @@ const PurchaseOrder = () => {
 
     );
     setRow(dataSearch)
-    
+
   }
 
 
@@ -60,6 +62,8 @@ const PurchaseOrder = () => {
   useEffect(() => {
     getPaymentInfo()
   }, [])
+
+  row.reverse()
   return (
 
     <>
@@ -78,6 +82,7 @@ const PurchaseOrder = () => {
                   <li>Buyer Name : {item.name}</li>
                   <li><i className="fa fa-envelope"></i> {item.email}</li>
                   <li><i className="fa fa-phone"></i> {item.contact}</li>
+                  <li><i className="fa fa-calendar"></i> {item.todaydate}</li>
                 </ul>
               </CCardBody>
             </CCard>
