@@ -75,7 +75,7 @@ const ViewReview = () => {
     }
     const deleteData = (id) => {
         try {
-            apiCall.delete(`/delete-rating/${id}`)
+            apiCall.delete(`/delete-ratings/${id}`)
                 .then(() => { setRow(prevData => prevData.filter(item => item.id !== id)) })
             setVisible(false);
         }

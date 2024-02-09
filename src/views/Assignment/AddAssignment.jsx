@@ -39,7 +39,7 @@ const AddAssignment = () => {
     ]
     const handleChange = (e) => {
         const { name, value, files } = e.target;
-        console.log(files);
+        
         setAssignment((prevData) => ({
             ...prevData,
             [name]: files ? files[0] : value
@@ -48,7 +48,7 @@ const AddAssignment = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Assignment Object:", assignment);
+     
         const formData = new FormData();
         for (const key in assignment) {
             formData.append(key, assignment[key]);
@@ -109,7 +109,7 @@ const AddAssignment = () => {
                                     id="university"
                                     options={[
                                         { label: 'Select', value: '' },
-                                        ...university.map((item) => {
+                                        ...university?.map((item) => {
                                             return {
                                                 label: item.name,
                                                 value: item.id
