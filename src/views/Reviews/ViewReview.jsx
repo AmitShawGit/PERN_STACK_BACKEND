@@ -75,7 +75,7 @@ const ViewReview = () => {
     }
     const deleteData = (id) => {
         try {
-            apiCall.delete(`/delete-review/${id}`)
+            apiCall.delete(`/delete-rating/${id}`)
                 .then(() => { setRow(prevData => prevData.filter(item => item.id !== id)) })
             setVisible(false);
         }
@@ -126,7 +126,7 @@ const ViewReview = () => {
                             <CRow>
 
                                 <CCol md="auto" className="mt-5">
-                                    <img src={imageURL + view?.image} onChange={handelChange} name="image" alt="imageofpost" />
+                                    <img src={imageURL + view?.image} onChange={handelChange} name="image" alt="imageofpost" className="img-fluid" />
                                 </CCol>
                             </CRow>
 
