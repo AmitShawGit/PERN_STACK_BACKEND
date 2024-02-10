@@ -25,7 +25,9 @@ const PurchaseOrder = () => {
     try {
       await apiCall.get(`/api/paymentinfo/${id}`)
         .then((res) => {
-          setView({ paymentimage: res.data.paymentimage, id: res.data.id });
+         
+          setView({ paymentimage: res.data[0].paymentimage, id: res.data[0].id });
+         
         })
 
     }
@@ -63,7 +65,7 @@ const PurchaseOrder = () => {
     getPaymentInfo()
   }, [])
 
-  row.reverse()
+
   return (
 
     <>
@@ -82,7 +84,7 @@ const PurchaseOrder = () => {
                   <li>Buyer Name : {item.name}</li>
                   <li><i className="fa fa-envelope"></i> {item.email}</li>
                   <li><i className="fa fa-phone"></i> {item.contact}</li>
-                  <li><i className="fa fa-calendar"></i> {item.todaydate}</li>
+                  <li><i className="fa fa-calendar"></i> {item.todayDate}</li>
                 </ul>
               </CCardBody>
             </CCard>
