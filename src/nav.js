@@ -146,6 +146,11 @@ const _nav = [
         to: '/auth/theme/view-query',
 
       },
+      {
+        component: CNavItem,
+        name: 'Go to Website',
+        to: 'https://mayankstudypoint.com/',
+      },
 
     ],
   },
