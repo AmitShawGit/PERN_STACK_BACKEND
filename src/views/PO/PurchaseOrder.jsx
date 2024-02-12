@@ -6,7 +6,7 @@ const PurchaseOrder = () => {
   let [row, setRow] = useState([])
   const [visible, setVisible] = useState(false);
   const [view, setView] = useState({ id: "", paymentimage: "" });
-  let imageURL = process.env.REACT_APP_BASE_URL
+  let imageURL = process.env.REACT_APP_BASE_URL +'payments/'
 
 
   const getPaymentInfo = async () => {
