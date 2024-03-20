@@ -16,7 +16,7 @@ const ViewUser = () => {
       _props: { scope: "col" },
     },
     {
-      key: "name",
+      key: "NAME",
       _props: { scope: "col" },
     },
     {
