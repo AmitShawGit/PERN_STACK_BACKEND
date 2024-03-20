@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import Input from 'src/components/Input';
-import { CCard, CCardBody, CButton, CRow, CCol, CFormSelect } from '@coreui/react'
+import { CCard, CCardBody, CButton, CRow, CCol, CFormSelect, CAlert } from '@coreui/react'
 import apiCall from "src/services/index.ts";
 
 const AddUser = () => {
   let [userCreated, setUserCreated] = useState({ name: "", email: "", password: "", mobile: "", address: "", role: "" })
-
+  let [alertVisible, setAlertVisible] = useState(false)
+  let [message,setMessage] = useState()
   let userRegistration = [
     {
       key: 1,
@@ -21,7 +22,7 @@ const AddUser = () => {
       key: 2,
       label: "Mobile Number",
       id: "mobile",
-      placeholder: "Please Enter Mpbile Number",
+      placeholder: "Please Enter Mobile Number",
       validation: "Please enter valid number",
       type: "number",
       name: "mobile",
@@ -47,7 +48,7 @@ const AddUser = () => {
     {
       key: 6,
       label: "Password",
-      id: "passsword",
+      id: "password",
       placeholder: "Please enter password",
       validation: "Please enter password",
       type: "password",
@@ -64,15 +65,29 @@ const AddUser = () => {
   //Save User
   const saveUser = async (e) => {
     e.preventDefault();
-    await apiCall.post("create-user", userCreated)
-      .then(res => alert(res.data))
+    await apiCall.post("/create-user", userCreated)
+      .then(res => {
+        setAlertVisible(true)
+        setMessage(res.data)
+       
+
+        setUserCreated({ name: "", email: "", password: "", mobile: "", address: "", role: "" })
+      }
+      )
       .catch((err) => { console.log(err) })
     console.log(userCreated);
   }
   return (
     <>
-      <CCard>
+        <CRow>
+          <CCol sm={4} className="offset-sm-8">
 
+            <CAlert color="success" dismissible visible={alertVisible} onClose={() => setAlertVisible(false)}>
+              {message}
+            </CAlert>
+          </CCol>
+        </CRow>
+      <CCard>
         <CCardBody>
           <form onSubmit={saveUser}>
             <CRow>
