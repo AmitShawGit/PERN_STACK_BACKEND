@@ -4,6 +4,7 @@ import React from 'react';
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
 const AddUser = React.lazy(() => import('./views/usermanagement/AddUser'));
 const ViewUser = React.lazy(() => import('./views/usermanagement/ViewUser'));
+const ViewCustomer = React.lazy(() => import('./views/usermanagement/ViewCustomers'));
 
 //Assignment
 const AddAssignment = React.lazy(() => import('./views/Assignment/AddAssignment'));
@@ -44,6 +45,11 @@ const route2 = [
         path: "/theme/view-user",
         name: "View User",
         element: ViewUser
+    },
+    {
+        path: "/theme/view-customer",
+        name: "View Customer",
+        element: ViewCustomer
     },
     {
         path: "/theme/add-user",

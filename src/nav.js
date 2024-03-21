@@ -37,6 +37,12 @@ const _nav = [
     to: '/auth/theme/view-user',
     icon: <CIcon icon={cilHappy} customClassName="nav-icon" />,
   },
+  {
+    component: CNavItem,
+    name: 'View Customer',
+    to: '/auth/theme/view-customer',
+    icon: <CIcon icon={cilHappy} customClassName="nav-icon" />,
+  },
 
   {
     component: CNavTitle,
