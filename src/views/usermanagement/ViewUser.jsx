@@ -6,7 +6,7 @@ import apiCall from "src/services/index.ts";
 const ViewUser = () => {
   let [row, setRow] = useState([])
   const [visible, setVisible] = useState(false);
-  const [view, setView] = useState({ id: "", name: "", phone_no: "", email: "", role: "" , address:"" });
+  const [view, setView] = useState({ id: "", NAME: "", phone_no: "", email: "", role: "" , address:"" });
 
 
   const columns = [
@@ -63,7 +63,7 @@ const ViewUser = () => {
 
   const handleAction = (id) => {
     const viewData = row.find(item => item.id === id);
-    setView(viewData || { id: "", name: "", phone_no: "", email: "", role: "" , address:"" });
+    setView(viewData || { id: "", NAME: "", phone_no: "", email: "", role: "" , address:"" });
     setVisible(true)
   }
 
@@ -115,8 +115,8 @@ const ViewUser = () => {
                   <CFormInput
                     type="text"
                     label="Name"
-                    name="name"
-                    value={view.name}
+                    name="NAME"
+                    value={view.NAME}
                     onChange={handelChange}
                   />
                 </CCol>

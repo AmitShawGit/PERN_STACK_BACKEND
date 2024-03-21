@@ -4,7 +4,7 @@ import { CCard, CCardBody, CButton, CRow, CCol, CFormSelect, CAlert } from '@cor
 import apiCall from "src/services/index.ts";
 
 const AddUser = () => {
-  let [userCreated, setUserCreated] = useState({ name: "", email: "", password: "", mobile: "", address: "", role: "" })
+  let [userCreated, setUserCreated] = useState({ uname: "", email: "", password: "", mobile: "", address: "", role: "" })
   let [alertVisible, setAlertVisible] = useState(false)
   let [message,setMessage] = useState()
   let userRegistration = [
@@ -15,7 +15,7 @@ const AddUser = () => {
       placeholder: "Please Enter Name",
       validation: "Please enter full name",
       type: "text",
-      name: "name",
+      name: "uname",
 
     },
     {
@@ -71,7 +71,7 @@ const AddUser = () => {
         setMessage(res.data)
        
 
-        setUserCreated({ name: "", email: "", password: "", mobile: "", address: "", role: "" })
+        setUserCreated({ uname: "", email: "", password: "", mobile: "", address: "", role: "" })
       }
       )
       .catch((err) => { console.log(err) })
