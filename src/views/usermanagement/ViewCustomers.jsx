@@ -1,4 +1,4 @@
-import { CTable, CModal, CButton, CModalBody, CModalTitle, CFormTextarea, CForm, CFormInput, CModalHeader, CModalFooter, CContainer, CRow, CCol } from "@coreui/react";
+import { CTable, CModal, CButton, CModalBody, CModalTitle, CForm, CFormInput, CModalHeader, CModalFooter, CContainer, CRow, CCol } from "@coreui/react";
 import React, { useEffect, useState } from "react";
 import apiCall from "src/services/index.ts";
 
@@ -17,6 +17,7 @@ const ViewCustomer = () => {
     },
     {
       key: "name",
+      label:"Name",
       _props: { scope: "col" },
     },
     {
@@ -63,7 +64,7 @@ const ViewCustomer = () => {
 
   const handleAction = (id) => {
     const viewData = row.find(item => item.id === id);
-    setView(viewData || { id: "", NAME: "", phone_no: "", email: "", role: "" , address:"" });
+    setView(viewData || { id: "", name: "", phone_no: "", email: "", role: "" , address:"" });
     setVisible(true)
   }
 
@@ -72,7 +73,7 @@ const ViewCustomer = () => {
   }
   const updateData = (view) => {
     try {
-      apiCall.put(`/update-specific-query/${view.id}`, view)
+      apiCall.put(`/update-specific-customer/${view.id}`, view)
         .then(() => { setRow(prevData => prevData.map(item => item.id === view.id ? view : item)) })
       setVisible(false);
     }
@@ -83,7 +84,7 @@ const ViewCustomer = () => {
   }
   const deleteData = (id) => {
     try {
-      apiCall.delete(`/delete-query/${id}`)
+      apiCall.delete(`/delete-customer/${id}`)
         .then(() => { setRow(prevData => prevData.filter(item => item.id !== id)) })
       setVisible(false);
     }
@@ -115,8 +116,8 @@ const ViewCustomer = () => {
                   <CFormInput
                     type="text"
                     label="Name"
-                    name="NAME"
-                    value={view.NAME}
+                    name="name"
+                    value={view.name}
                     onChange={handelChange}
                   />
                 </CCol>
@@ -132,9 +133,9 @@ const ViewCustomer = () => {
                 <CCol md="auto">
                   <CFormInput
                     type="number"
-                    name="phone_no"
+                    name="contact"
                     label="Mobile Number"
-                    value={view.phone_no}
+                    value={view.contact}
                     onChange={handelChange}
                   />
                 </CCol>
@@ -144,21 +145,13 @@ const ViewCustomer = () => {
               <CCol md="auto">
                   <CFormInput
                     type="text"
-                    name="role"
+                    name="password"
                     label="Role"
-                    value={view.role}
-                    onChange={handelChange} disabled
+                    value={view.password}
+                    onChange={handelChange} 
                   />
                 </CCol>
-                <CCol>
-                  <CFormTextarea
-                    label="Address"
-                    rows={3}
-                    name="address"
-                    value={view.address}
-                    onChange={handelChange}
-                  ></CFormTextarea>
-                </CCol>
+               
               </CRow>
             </CForm>
           </CContainer>

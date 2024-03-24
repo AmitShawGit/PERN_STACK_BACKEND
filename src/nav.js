@@ -6,7 +6,7 @@ import {
   cilNotes,
   cilPuzzle,cilCouch,
   cilSpeedometer,
-  cilStar,cilHappy
+  cilStar,cilHappy,cilContact
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -41,7 +41,7 @@ const _nav = [
     component: CNavItem,
     name: 'View Customer',
     to: '/auth/theme/view-customer',
-    icon: <CIcon icon={cilHappy} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
   },
 
   {
