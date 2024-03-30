@@ -131,7 +131,7 @@ const ViewUser = () => {
                 </CCol>
                 <CCol md="auto">
                   <CFormInput
-                    type="number"
+                    type="text"
                     name="phone_no"
                     label="Mobile Number"
                     value={view.phone_no}

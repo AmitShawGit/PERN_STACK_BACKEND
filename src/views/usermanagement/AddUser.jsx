@@ -6,7 +6,7 @@ import apiCall from "src/services/index.ts";
 const AddUser = () => {
   let [userCreated, setUserCreated] = useState({ uname: "", email: "", password: "", mobile: "", address: "", role: "" })
   let [alertVisible, setAlertVisible] = useState(false)
-  let [message,setMessage] = useState()
+  let [message, setMessage] = useState()
   let userRegistration = [
     {
       key: 1,
@@ -69,24 +69,23 @@ const AddUser = () => {
       .then(res => {
         setAlertVisible(true)
         setMessage(res.data)
-       
-
-        setUserCreated({ uname: "", email: "", password: "", mobile: "", address: "", role: "" })
+        setTimeout(() => {
+          setUserCreated({ uname: "", email: "", password: "", mobile: "", address: "", role: "" })
+        }, (1000))
       }
       )
       .catch((err) => { console.log(err) })
-    console.log(userCreated);
   }
   return (
     <>
-        <CRow>
-          <CCol sm={4} className="offset-sm-8">
+      <CRow>
+        <CCol sm={4} className="offset-sm-8">
 
-            <CAlert color="success" dismissible visible={alertVisible} onClose={() => setAlertVisible(false)}>
-              {message}
-            </CAlert>
-          </CCol>
-        </CRow>
+          <CAlert color="success" dismissible visible={alertVisible} onClose={() => setAlertVisible(false)}>
+            {message}
+          </CAlert>
+        </CCol>
+      </CRow>
       <CCard>
         <CCardBody>
           <form onSubmit={saveUser}>
