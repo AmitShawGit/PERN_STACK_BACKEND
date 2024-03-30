@@ -95,7 +95,10 @@ const ViewUser = () => {
   }
   return (
     <>
+    <div className="table-responsive">
+
       <CTable columns={columns} items={tableData} />
+    </div>
 
 
       <CModal

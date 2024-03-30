@@ -56,8 +56,9 @@ const NewsLetter = () => {
     }
     return (
         <>
+        <div className="table-responsive">
             <CTable columns={columns} items={tableData} />
-
+            </div>
 
         </>
     )

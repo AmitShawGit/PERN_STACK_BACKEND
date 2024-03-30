@@ -96,8 +96,9 @@ const ViewCustomer = () => {
   }
   return (
     <>
+    <div className="table-responsive">
       <CTable columns={columns} items={tableData} />
-
+      </div>
 
       <CModal
         visible={visible}
