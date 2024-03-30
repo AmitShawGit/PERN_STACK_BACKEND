@@ -17,7 +17,7 @@ const ViewCustomer = () => {
     },
     {
       key: "name",
-      label:"Name",
+      label: "Name",
       _props: { scope: "col" },
     },
     {
@@ -64,7 +64,7 @@ const ViewCustomer = () => {
 
   const handleAction = (id) => {
     const viewData = row.find(item => item.id === id);
-    setView(viewData || { id: "", name: "", phone_no: "", email: "", role: "" , address:"" });
+    setView(viewData || { id: "", name: "", phone_no: "", email: "", role: "", address: "" });
     setVisible(true)
   }
 
@@ -142,16 +142,16 @@ const ViewCustomer = () => {
 
               </CRow>
               <CRow>
-              <CCol md="auto">
+                <CCol md="auto">
                   <CFormInput
                     type="text"
                     name="password"
                     label="Role"
                     value={view.password}
-                    onChange={handelChange} 
+                    onChange={handelChange}
                   />
                 </CCol>
-               
+
               </CRow>
             </CForm>
           </CContainer>
@@ -169,3 +169,5 @@ const ViewCustomer = () => {
 };
 
 export default ViewCustomer;
+
+
