@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 // import Dashboard from './views/dashboard/Dashboard';
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
 const AddUser = React.lazy(() => import('./views/usermanagement/AddUser'));
@@ -19,9 +20,10 @@ const AddFreePdf = React.lazy(() => import('./views/Freepdf/AddFreePdf'));
 const ViewFreePdf = React.lazy(() => import('./views/Freepdf/ViewFreePdf'));
 
 
-//Review
+//CMS
 const AddReview = React.lazy(() => import('./views/Reviews/AddReview'));
 const ViewReview = React.lazy(() => import('./views/Reviews/ViewReview'));
+const AddSlider = React.lazy(()=> import('./views/HeroSlider/HeroSlider'))
 
 //Others
 const ViewCallBack = React.lazy(() => import('./views/Others/ViewCallBack'));
@@ -95,6 +97,16 @@ const route2 = [
         path: "/add-review",
         name: "Add Review",
         element: AddReview
+    },
+    {
+        path: "/slider/view-slider",
+        name: "View Slider",
+        element: ViewReview
+    },
+    {
+        path: "/slider/add-slider",
+        name: "Add Slider",
+        element: AddSlider
     },
     {
         path: "/view-call-back",

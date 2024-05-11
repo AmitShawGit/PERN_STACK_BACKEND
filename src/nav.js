@@ -6,7 +6,7 @@ import {
   cilNotes,
   cilPuzzle,cilCouch,
   cilSpeedometer,
-  cilStar,cilHappy,cilContact
+  cilStar,cilHappy,cilContact,cilEthernet
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -105,7 +105,7 @@ const _nav = [
 
   {
     component: CNavTitle,
-    name: 'Reviews',
+    name: 'CMS',
   },
   {
     component: CNavGroup,
@@ -121,6 +121,25 @@ const _nav = [
         component: CNavItem,
         name: 'View Review',
         to: '/auth/view-review',
+      },
+
+
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Slider',
+    icon: <CIcon icon={cilEthernet} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Add Slider',
+        to: '/auth/slider/add-slider',
+      },
+      {
+        component: CNavItem,
+        name: 'View Slider',
+        to: '/auth/slider/view-slider',
       },
 
 
