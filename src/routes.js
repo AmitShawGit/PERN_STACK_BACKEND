@@ -26,6 +26,7 @@ const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 const Login = React.lazy(()=> import('./views/signup/Login'))
+
 const routes = [
   { path: '/', exact: true, name: 'logIn' , element:Login},
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
