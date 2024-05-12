@@ -25,14 +25,17 @@ background-size: cover;
     position: relative;
    
  span{
-    background: aqua;
+    background: #3153b9;
     width: 26px;
     position: absolute;
     text-align: center;
     border-radius: 50%;
     aspect-ratio: 1;
     right: 0;
+    font-size: 12px;
     top: -14px;
-
+    color: #fff;
+cursor: pointer;
+padding-top: 4px;
  }
 }
