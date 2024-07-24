@@ -1,5 +1,6 @@
 import React, { useState, createRef } from 'react';
 import { CCard, CCardBody, CRow, CCol, CButton } from '@coreui/react';
+import apiCall from 'src/services/index.ts';
 const Heroslider = () => {
 
   let [previewImage, setPreviewImage] = useState(null);
@@ -17,7 +18,14 @@ const Heroslider = () => {
     setIsVisible(false)
   }
   let postImage = () => {
+    const formData = new FormData();
+    formData.append("sliderImage", imageFile.current.files[0]);
 
+    apiCall.post(process.env.REACT_APP_BASE_URL + "post-slider", formData,{
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
   }
 
   return (

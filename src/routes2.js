@@ -24,6 +24,7 @@ const ViewFreePdf = React.lazy(() => import('./views/Freepdf/ViewFreePdf'));
 const AddReview = React.lazy(() => import('./views/Reviews/AddReview'));
 const ViewReview = React.lazy(() => import('./views/Reviews/ViewReview'));
 const AddSlider = React.lazy(()=> import('./views/HeroSlider/HeroSlider'))
+const ViewSlider= React.lazy(()=>import('./views/HeroSlider/ViewSlider'));
 
 //Others
 const ViewCallBack = React.lazy(() => import('./views/Others/ViewCallBack'));
@@ -101,7 +102,7 @@ const route2 = [
     {
         path: "/slider/view-slider",
         name: "View Slider",
-        element: ViewReview
+        element: ViewSlider
     },
     {
         path: "/slider/add-slider",
