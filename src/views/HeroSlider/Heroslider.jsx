@@ -25,7 +25,16 @@ const Heroslider = () => {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
-    })
+    }
+  )
+
+  .then((res)=>{
+    alert(res.data.response);
+    imageFile.current.value = "";
+    setIsVisible(false)
+    setPreviewImage(false)
+  })
+  .catch((err)=>{console.log(err.message);})
   }
 
   return (
