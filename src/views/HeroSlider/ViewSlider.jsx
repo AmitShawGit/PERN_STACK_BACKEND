@@ -3,8 +3,70 @@ import apiCall from 'src/services/index.ts'
 import { CTable } from '@coreui/react';
 
 const ViewSlider = () => {
-  let [slider, setSlider] = useState([])
+  let [slider, setSlider] = useState([]);
+  let [isVisible, setIsVisible] = useState([]);
+
   let imageURL = process.env.REACT_APP_BASE_URL + "uploadSlider/"
+
+  //switch on off by backend
+  const isSliderOn = () => {
+    apiCall.get("/showSlider")
+      .then((res) => {
+        setIsVisible(res.data)
+      })
+      .catch((err) => { console.log(err); })
+  }
+  // custom switch on off 
+  const checkValue = (e) => {
+    let isChecked = e.target.checked;
+    console.log(isChecked);
+
+    if (isChecked && slider.length !== 0) {
+      apiCall.put("/showHideSlider", {
+        visibility: 1,
+        sliderId: isVisible[0].id
+      })
+        .then((res) => {
+          setIsVisible((prev) =>
+            prev.map((item, index) => {
+              if (index === 0) {
+                return { ...item, visibility: 1 };
+              }
+              return item;
+            })
+          );
+          alert(res.data)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else if (!isChecked && slider.length !== 0) {
+      console.log("Slider Hidden From website");
+      apiCall.put("/showHideSlider", {
+        visibility: 0,
+        sliderId: isVisible[0].id
+      })
+        .then((res) => {
+          setIsVisible((prev) =>
+            prev.map((item, index) => {
+              if (index === 0) {
+                return { ...item, visibility: 0 };
+              }
+              return item;
+            })
+          );
+          alert(res.data)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else if (isChecked && slider.length === 0) {
+      alert("Please add at least two images");
+    }
+  };
+
+
+
   const columns = [
     {
       key: "id",
@@ -34,10 +96,6 @@ const ViewSlider = () => {
     }
   }
 
-  useEffect(() => {
-    getData();
-  }, [])
-
   const tableData = slider.map((data, index) => ({
 
     ...data,
@@ -63,8 +121,21 @@ const ViewSlider = () => {
 
   }
 
+  useEffect(() => {
+    getData();
+    isSliderOn();
+  }, [])
+
+
+
   return (
     <>
+      {/* <h3>Do you want to show slider in Home page? </h3>&nbsp; */}
+      <div className="form-check form-switch">
+        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Do you want to show slider in Home page?</label>
+        <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onChange={checkValue} checked={isVisible.length !== 0 ? Boolean(isVisible[0].visibility) : false} />
+      </div>
+
       <div className="table-responsive">
         <CTable columns={columns} items={tableData} />
       </div>
@@ -72,4 +143,4 @@ const ViewSlider = () => {
   )
 }
 
-export default ViewSlider
+export default ViewSlider;
