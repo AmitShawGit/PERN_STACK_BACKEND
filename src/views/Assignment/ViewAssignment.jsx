@@ -1,12 +1,12 @@
 import { CTable, CModal, CButton, CModalBody, CModalTitle, CFormTextarea, CForm, CFormInput, CModalHeader, CModalFooter, CContainer, CRow, CCol } from "@coreui/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useRef ,createRef} from "react";
 import apiCall from "src/services/index.ts";
 
 
 const ViewAssignment = () => {
   let [university, setUniversity] = useState([])
   const [visible, setVisible] = useState(false);
-  const [view, setView] = useState({ id: "", subject_name: "", semester: "", sell_price: "", price: "", short_description: "", description: "", image: "" });
+  const [view, setView] = useState({ id: "", subject_name: "", semester: "", sell_price: "", price: "", short_description: "", description: "", image: null });
   let [subject, setSubject] = useState([])
   let imageURL = process.env.REACT_APP_BASE_URL + "upload/"
   const columns = [
@@ -80,19 +80,42 @@ const ViewAssignment = () => {
     setVisible(true)
   }
 
+  const previewImg = createRef(null);
   //handle update form
   const handelChange = (e) => {
     setView((item) => ({ ...item, [e.target.name]: e.target.value }))
   }
+  const handleImageChange = (e) => {
+    const showImage = URL.createObjectURL(e.target.files[0])
+    previewImg.current.src = showImage
+    // setView((item) => ({ ...item, image: showImage }))
+  }
+let UpdateImage = useRef(null)
   const updateData = (view) => {
+    const formData = new FormData();
+    Object.keys(view).forEach((key)=>{
+      console.log(view[key]); 
+      if(key!=="image"){
+        formData.append(key,view[key])
+      }
+    })
+    if(UpdateImage.current.files[0]){
+      console.log(UpdateImage.current.files[0]);
+      formData.append('image',UpdateImage.current.files[0])
+ 
+      
+    }
     try {
-      apiCall.put(`/update-specific-assignment/${view.id}`, view)
+      apiCall.put(`/update-specific-assignment/${view.id}`, formData,{
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }})
         .then(() => {
-          setTimeout(()=>{
-            setUniversity(prevData => prevData.map(item => item.id === view.id ? view : item)) 
-          },1000)
+          setTimeout(() => {
+            setUniversity(prevData => prevData.map(item => item.id === view.id ? view : item))
+          }, 1000)
 
-          })
+        })
       setVisible(false);
     }
     catch (error) {
@@ -132,8 +155,8 @@ const ViewAssignment = () => {
 
       </CRow>
       <div className="table-responsive">
-      <CTable columns={columns} items={tableData} />
-</div>
+        <CTable columns={columns} items={tableData} />
+      </div>
 
       <CModal
         visible={visible}
@@ -205,7 +228,13 @@ const ViewAssignment = () => {
                   ></CFormTextarea>
                 </CCol>
                 <CCol md="6">
-                  <img src={imageURL + view?.image} onChange={handelChange} name="image" alt="imageofpost" className="img-fluid" />
+                  <div className="image-section">
+                    <label htmlFor="imageUpdate" className="fileUpdate">
+                      <i className="fa fa-camera"></i>
+                      <input type="file" id="imageUpdate" onChange={handleImageChange} name="image" style={{ display: 'none' }} ref={UpdateImage} />
+                    </label>
+                    <img src={view?.image !== "" ? imageURL + view?.image: view?.image} name="image" alt="imageOfPost" className="img-fluid" ref={previewImg} />
+                  </div>
                 </CCol>
               </CRow>
             </CForm>
