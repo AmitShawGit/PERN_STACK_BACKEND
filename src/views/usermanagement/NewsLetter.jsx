@@ -27,7 +27,8 @@ const NewsLetter = () => {
     useEffect(() => {
         apiCall.get('/newsletter-get')
             .then(response => {
-                setRow(response.data);
+                let receiveData = response.data
+                setRow(receiveData.reverse());
             })
             .catch(error => {
                 console.error(error);

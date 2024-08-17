@@ -27,6 +27,11 @@ const ViewCallBack = () => {
       label: "Email",
       _props: { scope: "col" },
     },
+    {
+      key: "date",
+      label: "Date",
+      _props: { scope: "col" },
+    },
 
     {
       key: "action",
@@ -39,7 +44,8 @@ const ViewCallBack = () => {
   useEffect(() => {
     apiCall.get('/view-call-back')
       .then(response => {
-        setRow(response.data);
+        let receiveData = response.data
+        setRow(receiveData.reverse());
       })
       .catch(error => {
         console.error(error);

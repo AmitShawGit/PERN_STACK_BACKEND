@@ -20,6 +20,11 @@ const ViewQuery = () => {
       _props: { scope: "col" },
     },
     {
+      key: "date",
+      label:"Date",
+      _props: { scope: "col" },
+    },
+    {
       key: "phone_no",
       label: "Phone No",
       _props: { scope: "col" },
@@ -45,7 +50,8 @@ const ViewQuery = () => {
   useEffect(() => {
     apiCall.get('/view-user')
       .then(response => {
-        setRow(response.data);
+        let latestData = response.data; 
+        setRow(latestData.reverse());
       })
       .catch(error => {
         console.error(error);
