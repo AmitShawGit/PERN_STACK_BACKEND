@@ -62,6 +62,7 @@ const ViewQuery = () => {
   const tableData = row.map((data, index) => ({
     ...data,
     id: index + 1,
+    email: (<a href={`mailto:${data.email}`}>{data.email}</a>),
     action: (
       <i className="fa fa-pen" onClick={() => handleAction(data.id)}></i>
     )

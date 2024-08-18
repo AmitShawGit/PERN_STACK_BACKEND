@@ -56,6 +56,7 @@ const ViewCallBack = () => {
   const tableData = row.map((data, index) => ({
     ...data,
     id: index + 1,
+    email: (<a href={`mailto:${data.email}`}>{data.email}</a>),
     action: (
       <i className="fa fa-trash" onClick={() => deleteData(data.id)}></i>
     )
