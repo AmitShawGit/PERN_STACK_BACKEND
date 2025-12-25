@@ -5,9 +5,10 @@ const PrivateRoute = () => {
     let [login, setLogin] = useState(false)
     let navigate = useNavigate()
     let auth = localStorage.getItem("auth")
+
     let checkLogin = () => {
         if (auth === 'Your are most Welcome ' + true) {
-            setLogin("Your are most Welcome " + true)
+            setLogin(true)
         } else {
             setLogin(false)
             navigate('/')

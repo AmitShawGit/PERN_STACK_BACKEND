@@ -6,7 +6,7 @@ import {
   cilNotes,
   cilPuzzle,cilCouch,
   cilSpeedometer,
-  cilStar,cilHappy,cilContact,cilEthernet
+  cilStar,cilHappy,cilContact,cilEthernet, cilBrightness
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -81,6 +81,20 @@ const _nav = [
     ],
   },
   {
+    component: CNavGroup,
+    name: 'Assignment Cycle',
+    to: '/assignment-cycle',
+    icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'View Assignment Cycle',
+        to: '/auth/assigmentcycle/view-assignment-cycle',
+      },
+
+    ],
+  },
+  {
     component: CNavTitle,
     name: 'Pdf',
   },
@@ -145,6 +159,27 @@ const _nav = [
 
     ],
   },
+
+   {
+    component: CNavGroup,
+    name: 'Blogs',
+    icon: <CIcon icon={cilBrightness} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Add Blogs',
+        to: '/auth/blog/add-blog',
+      },
+      {
+        component: CNavItem,
+        name: 'View Blog',
+        to: '/auth/slider/view-blog',
+      },
+
+
+    ],
+  },
+
   {
     component: CNavTitle,
     name: 'Others',
