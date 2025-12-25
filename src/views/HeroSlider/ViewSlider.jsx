@@ -6,6 +6,8 @@ const ViewSlider = () => {
   let [slider, setSlider] = useState([]);
   let [isVisible, setIsVisible] = useState([]);
 
+
+
   let imageURL = process.env.REACT_APP_BASE_URL + "uploadSlider/"
 
   //switch on off by backend
@@ -19,28 +21,35 @@ const ViewSlider = () => {
   // custom switch on off 
   const checkValue = (e) => {
     let isChecked = e.target.checked;
-    console.log(isChecked);
+    console.log("returning is checked from check value ", isChecked);
 
-    if (isChecked && slider.length !== 0) {
-      apiCall.put("/showHideSlider", {
-        visibility: 1,
-        sliderId: isVisible[0].id
-      })
-        .then((res) => {
-          setIsVisible((prev) =>
-            prev.map((item, index) => {
-              if (index === 0) {
-                return { ...item, visibility: 1 };
-              }
-              return item;
-            })
-          );
-          alert(res.data)
+    console.log(slider.length);
+
+
+    if (isChecked) {
+      if (slider.length !== 0) {
+        apiCall.put("/showHideSlider", {
+          visibility: 1,
+          sliderId: isVisible[0].id
         })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else if (!isChecked && slider.length !== 0) {
+          .then((res) => {
+            setIsVisible((prev) =>
+              prev.map((item, index) => {
+                if (index === 0) {
+                  return { ...item, visibility: 1 };
+                }
+                return item;
+              })
+            );
+            alert(res.data)
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    }
+
+    if (!isChecked) {
       console.log("Slider Hidden From website");
       apiCall.put("/showHideSlider", {
         visibility: 0,
@@ -63,6 +72,7 @@ const ViewSlider = () => {
     } else if (isChecked && slider.length === 0) {
       alert("Please add at least two images");
     }
+
   };
 
 
@@ -121,10 +131,18 @@ const ViewSlider = () => {
 
   }
 
+
+
   useEffect(() => {
     getData();
     isSliderOn();
+
+    setTimeout(() => {
+      console.log("isvisible", isVisible);
+    }, 2000)
+    return clearTimeout()
   }, [])
+  
 
 
 

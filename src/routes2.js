@@ -33,6 +33,7 @@ const ViewReview = React.lazy(() => import('./views/Reviews/ViewReview'));
 const AddSlider = React.lazy(() => import('./views/HeroSlider/HeroSlider'))
 const ViewSlider = React.lazy(() => import('./views/HeroSlider/ViewSlider'));
 const AddBlog = React.lazy(()=> import('./views/blog/AddBlog'))
+const ViewBlog = React.lazy(()=> import('./views/blog/ViewBlog'))
 
 //Others
 const ViewCallBack = React.lazy(() => import('./views/Others/ViewCallBack'));
@@ -136,6 +137,11 @@ const route2 = [
         path: "/blog/add-blog",
         name: "Add Blog",
         element: AddBlog
+    },
+    {
+        path: "/blog/view-blog",
+        name: "View Blog",
+        element: ViewBlog
     },
 ]
 

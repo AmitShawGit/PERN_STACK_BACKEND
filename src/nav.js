@@ -173,7 +173,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'View Blog',
-        to: '/auth/slider/view-blog',
+        to: '/auth/blog/view-blog',
       },
 
 
