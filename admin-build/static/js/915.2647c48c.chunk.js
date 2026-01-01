@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunk_coreui_coreui_free_react_admin_template=self.webpackChunk_coreui_coreui_free_react_admin_template||[]).push([[915],{1915:(e,r,c)=>{c.r(r),c.d(r,{default:()=>a});c(2791);var _=c(184);const a=()=>(0,_.jsx)(_.Fragment,{children:(0,_.jsx)("h3",{children:"Welcome Users"})})}}]);
-//# sourceMappingURL=915.2647c48c.chunk.js.map
