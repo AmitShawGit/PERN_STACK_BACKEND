@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CCol, CContainer, CForm, CRow, CFormInput, CCard } from "@coreui/react";
+import { CCol, CContainer, CForm, CRow, CFormInput, CCard, CFormTextarea } from "@coreui/react";
 import { useForm } from "@refinedev/react-hook-form"
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -52,7 +52,7 @@ export default function AddBlog() {
         // Image
 
         formData.append("img", value);
-        console.log("val", value);
+        // console.log("val", value);
 
 
         //   let allData = [...formData.entries()];
@@ -68,10 +68,12 @@ export default function AddBlog() {
                 },
             });
 
-            console.log(res.data);
+            // console.log("res",res);
+            console.log("res.data",res.data.message);
             alert("Blog added successfully");
         } catch (err) {
-            console.error(err);
+            // console.error(err);
+             alert(err.response.data.message);
         }
     };
 
@@ -92,20 +94,20 @@ export default function AddBlog() {
                                 />
                             </CCol>
                             <CCol md="4">
-                                <CFormInput
-                                    type="text"
+                                <CFormTextarea
+                                    rows="3"
                                     name="shortDesc"
                                     label="Short Description"
                                     {...register('shortDesc')}
-                                />
+                                ></CFormTextarea>
                             </CCol>
                             <CCol md="4">
-                                <CFormInput
-                                    type="text"
+                                <CFormTextarea
+                                    rows="3"
                                     name="description"
                                     label="Description"
                                     {...register('description')}
-                                />
+                                ></CFormTextarea>
                             </CCol>
                             <CCol md="4">
                                 <CFormInput
